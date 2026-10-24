@@ -51,6 +51,8 @@ ecosystem.config.js    PM2
 
 ## 카페24 서버에 올리기
 
+**처음 받은 빈 서버라면 [deploy/SERVER.md](deploy/SERVER.md) 를 위에서부터 따라 하세요**(Node · nginx 설치부터 HTTPS · 방화벽까지). 아래는 이미 준비된 서버의 요약입니다.
+
 ```bash
 cd /root/www && git clone https://github.com/managepkm-coder/EEcenter-backend.git ee-upbattery && cd ee-upbattery
 cp .env.example .env && vi .env                       # ADMIN_PASSWORD · SITE_URL
