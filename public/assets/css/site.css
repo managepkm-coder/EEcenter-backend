@@ -21,7 +21,12 @@
   --header-h: 74px;
 }
 
-html { scroll-padding-top: calc(var(--header-h) + 12px); }
+/* 글자 크기 — 기본 16px 의 1.5배(2026-10-24 요청: "글씨가 전반적으로 작다"). 사이트의 글자 크기는 모두 rem 이라
+   여기 한 줄이 전체 비율을 정한다. Bootstrap 의 칸 사이 여백(rem)도 함께 커져 글과 여백의 비율이 그대로 남는다.
+   휴대폰 · 태블릿(991px 이하)은 1.25배다 — 1.5배면 375px 화면에서 메인 첫 화면이 제목과 단추로 꽉 차고
+   단추 글자가 화면 끝에 닿는다(확인함). 머리말은 이 비율을 따르지 않는다(.site-header 참고). */
+html { font-size: 150%; scroll-padding-top: calc(var(--header-h) + 12px); }
+@media (max-width: 991.98px) { html { font-size: 125%; } }
 body {
   font-family: 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
   color: var(--ink);
@@ -51,9 +56,11 @@ main:focus { outline: none; }
 .btn-ghost:hover { background: rgba(255,255,255,.15); color: #fff; }
 
 /* ---------- 머리말 ---------- */
-.site-header { position: sticky; top: 0; z-index: 1000; background: var(--navy-800); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+/* 머리말은 글자 크기를 px 로 고정하고 안쪽은 em 으로 잰다. 본문처럼 1.5배로 키우면 메뉴 다섯 칸이 1440px 에서도
+   한 줄에 들어가지 않아 글자가 세로로 꺾인다(확인함). 그래도 전보다 조금 키웠다(16 → 18px). */
+.site-header { font-size: 18px; position: sticky; top: 0; z-index: 1000; background: var(--navy-800); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
 .site-header-inner { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding: 0 28px; gap: 16px; }
-.site-logo { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 1.2rem; font-weight: 800; text-decoration: none; white-space: nowrap; }
+.site-logo { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 1.2em; font-weight: 800; text-decoration: none; white-space: nowrap; }
 .site-logo:hover { color: #fff; }
 .site-logo .bi { color: var(--point-300); }
 .site-logo-brand { color: var(--point-300); }
@@ -70,37 +77,42 @@ main:focus { outline: none; }
   background: #fff; border-top: 3px solid var(--point-500); border-radius: 0 0 6px 6px; box-shadow: 0 10px 20px rgba(0,0,0,.15);
 }
 .gnb-item:hover .gnb-dropdown, .gnb-item:focus-within .gnb-dropdown { display: block; }
-.gnb-dropdown a { display: block; padding: 9px 20px; color: #3f4954; font-size: .9rem; text-decoration: none; }
+.gnb-dropdown a { display: block; padding: 9px 20px; color: #3f4954; font-size: .9em; text-decoration: none; }
 .gnb-dropdown a:hover, .gnb-dropdown a:focus-visible { background: #f1f5f9; color: var(--point-700); font-weight: 700; }
 .gnb-dropdown a[aria-current="page"] { color: var(--point-700); font-weight: 700; }
 
 .site-header-actions { display: flex; align-items: center; gap: 12px; }
 .header-tel { color: #e2e8f0; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .header-tel:hover { color: #fff; }
-.btn-all-menu { background: var(--point-500); color: var(--navy-900); border: 0; border-radius: 4px; padding: 10px 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.btn-all-menu { white-space: nowrap; flex-shrink: 0; background: var(--point-500); color: var(--navy-900); border: 0; border-radius: 4px; padding: 10px 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .btn-all-menu:hover { background: var(--point-600); }
 
 .notice-bar { background: var(--point-50); border-bottom: 1px solid var(--point-line); padding: 12px 20px; text-align: center; font-size: .92rem; color: #5c4300; }
 .notice-bar .bi { color: var(--point-icon); margin-right: 6px; }
 .notice-bar strong { color: var(--point-700); }
 
-/* 넓은 메뉴 다섯 칸이 들어가지 않는 폭에서는 '전체메뉴' 하나로 모은다 */
-@media (max-width: 1199.98px) {
+/* 넓은 메뉴 다섯 칸이 들어가지 않는 폭에서는 '전체메뉴' 하나로 모은다.
+   머리말 글자를 18px 로 키운 뒤(2026-10-24) 메뉴 · 로고 · 전화 · 단추를 합치면 1340px 가량이라 1400px 부터 펼친다.
+   그보다 좁으면 '전체메뉴' 단추가 눌려 글자가 세로로 꺾였다(1200 · 1280px 에서 확인함). */
+@media (max-width: 1399.98px) {
   .gnb { display: none; }
 }
+/* Bootstrap 의 가장 넓은 칸 사이(g-lg-5 · 3rem)는 글자를 1.5배로 키우면 72px 이 되어 992px 화면에서 컨테이너 여백보다
+   넓어지고 가로 스크롤이 생긴다(확인함). 48px 로 묶는다. */
+@media (min-width: 992px) { .g-lg-5 { --bs-gutter-x: 2rem; --bs-gutter-y: 2rem; } }
 /* 휴대폰 · 태블릿 폭에서는 '전체메뉴' 글자를 빼고 아이콘(≡)만 둔다(2026-10-24 요청). 글자는 화면에서만 감추고
    읽기 프로그램에는 남긴다 — display:none 으로 지우면 단추 이름이 없어져 "단추" 라고만 읽힌다. */
 @media (max-width: 991.98px) {
   .btn-all-menu span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
   /* 손가락으로 누르기 좋은 44px 정사각형 — 글자가 빠진 만큼 아이콘을 키운다 */
-  .btn-all-menu { width: 44px; height: 44px; padding: 0; justify-content: center; font-size: 1.5rem; line-height: 1; }
+  .btn-all-menu { width: 44px; height: 44px; padding: 0; justify-content: center; font-size: 1.5em; line-height: 1; }
 }
 @media (max-width: 575.98px) {
   .site-header-inner { padding: 0 14px; }
-  .site-logo { font-size: 1rem; }
+  .site-logo { font-size: 1em; }
   .site-logo-co { display: none; }
   .header-tel span { display: none; }
-  .header-tel { font-size: 1.15rem; padding: 6px; }
+  .header-tel { font-size: 1.15em; padding: 6px; }
   .notice-bar { font-size: .82rem; text-align: left; }
 }
 
