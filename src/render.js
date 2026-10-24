@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const env = require('./config/env');
@@ -298,6 +299,28 @@ function fillValues(text) {
   return text.replace(/\{\{(\w+)\}\}/g, (all, key) => (key in values ? esc(values[key]) : all));
 }
 
+// CSS · 스크립트 주소 끝에 파일 내용의 짧은 지문을 붙인다(/assets/css/site.css?v=1a2b3c4d5e).
+// 운영에서는 /assets 를 7일 동안 다시 묻지 않게 내보내는데(app.js), 주소가 그대로면 파일을 고쳐도 한 번 열어본 브라우저는
+// 일주일 동안 옛 CSS 를 씁니다 — 글자 크기를 바꾼 것이 "반영했는데 그대로" 로 보인 자리입니다(2026-10-24).
+// 내용이 바뀌면 지문이 바뀌어 새 주소가 되므로 곧바로 새 파일을 받습니다. 지문은 프로세스가 뜰 때 한 번 재고(pm2 restart 로 새로 잼),
+// 파일을 못 읽으면 지문 없이 원래 주소를 그대로 둡니다 — 화면이 깨지는 것보다 낫습니다.
+const PUBLIC = path.join(__dirname, '..', 'public');
+const assetVersions = new Map();
+function assetVersion(url) {
+  if (!assetVersions.has(url)) {
+    let v = '';
+    try { v = crypto.createHash('sha1').update(fs.readFileSync(path.join(PUBLIC, url))).digest('hex').slice(0, 10); } catch (e) { /* 지문 없이 둔다 */ }
+    assetVersions.set(url, v);
+  }
+  return assetVersions.get(url);
+}
+function versionAssets(html) {
+  return html.replace(/(href|src)="(\/assets\/[^"?#]+\.(?:css|js))"/g, (all, attr, url) => {
+    const v = assetVersion(url);
+    return v ? `${attr}="${url}?v=${v}"` : all;
+  });
+}
+
 function renderPage({ view, pathname, ctx = {}, meta: extraMeta = {} }) {
   const { meta: fileMeta, body } = splitMeta(readView(`pages/${view}`));
   const meta = { ...fileMeta, ...extraMeta };
@@ -320,7 +343,7 @@ function renderPage({ view, pathname, ctx = {}, meta: extraMeta = {} }) {
     scripts,
   };
   // 한 번에 바꾼다 — 차례로 바꾸면 앞에서 넣은 본문 안에 같은 표시가 있을 때 두 번 채워진다.
-  return layout.replace(/\{\{(\w+)\}\}/g, (all, key) => (key in parts ? parts[key] : all));
+  return versionAssets(layout.replace(/\{\{(\w+)\}\}/g, (all, key) => (key in parts ? parts[key] : all)));
 }
 
-module.exports = { renderPage, esc };
+module.exports = { renderPage, esc, versionAssets };
