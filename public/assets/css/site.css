@@ -88,14 +88,19 @@ main:focus { outline: none; }
 @media (max-width: 1199.98px) {
   .gnb { display: none; }
 }
+/* 휴대폰 · 태블릿 폭에서는 '전체메뉴' 글자를 빼고 아이콘(≡)만 둔다(2026-10-24 요청). 글자는 화면에서만 감추고
+   읽기 프로그램에는 남긴다 — display:none 으로 지우면 단추 이름이 없어져 "단추" 라고만 읽힌다. */
+@media (max-width: 991.98px) {
+  .btn-all-menu span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  /* 손가락으로 누르기 좋은 44px 정사각형 — 글자가 빠진 만큼 아이콘을 키운다 */
+  .btn-all-menu { width: 44px; height: 44px; padding: 0; justify-content: center; font-size: 1.5rem; line-height: 1; }
+}
 @media (max-width: 575.98px) {
   .site-header-inner { padding: 0 14px; }
   .site-logo { font-size: 1rem; }
   .site-logo-co { display: none; }
   .header-tel span { display: none; }
   .header-tel { font-size: 1.15rem; padding: 6px; }
-  .btn-all-menu span { display: none; }
-  .btn-all-menu { padding: 10px 12px; }
   .notice-bar { font-size: .82rem; text-align: left; }
 }
 
