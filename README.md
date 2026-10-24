@@ -52,7 +52,7 @@ ecosystem.config.js    PM2
 ## 카페24 서버에 올리기
 
 ```bash
-cd /root/www && git clone … && cd ee-upbattery     # 또는 이 폴더만 옮긴다
+cd /root/www && git clone https://github.com/managepkm-coder/EEcenter-backend.git ee-upbattery && cd ee-upbattery
 cp .env.example .env && vi .env                       # ADMIN_PASSWORD · SITE_URL
 npm ci --omit=dev
 pm2 start ecosystem.config.js && pm2 save

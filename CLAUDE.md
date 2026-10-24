@@ -1,7 +1,8 @@
-# CLAUDE.md — upgrade-center
+# CLAUDE.md — EEcenter-backend
 
-이 폴더는 캠카(상위 폴더)와 **별개의 사이트**입니다 — Korea BTS · EE Up Battery 캠핑카 업그레이드 센터 홈페이지.
-상위 CLAUDE.md 의 캠카 규약(등급 · 매물 · role-matrix 등)은 여기에 해당하지 않습니다. 구조와 실행 방법은 README.md.
+Korea BTS · EE Up Battery 캠핑카 업그레이드 센터 홈페이지입니다. 캠카(managepkm-coder/campcar-backend)와 같은 방식으로
+만들었지만 **별개의 사이트 · 별개의 저장소**입니다 — 캠카 규약(등급 · 매물 · role-matrix 등)은 여기에 해당하지 않습니다.
+구조와 실행 방법은 README.md.
 
 ## 지키는 것
 
@@ -26,3 +27,9 @@
          16개 화면을 떠서 주소를 상대 경로로 바꾸고, Bootstrap · 아이콘을 node_modules 에서 복사해(devDependencies 로 판 고정) 인터넷 없이 열립니다.
          접수는 서버가 있어야 저장되므로 미리보기에서는 동작하지 않고, 화면 위 노란 줄과 폼 안내가 그 사정을 알립니다.
          확인한 것 — file:// 로 열어 바깥 요청 0건, 아이콘 글꼴 · Bootstrap 적용, 메뉴 → 서비스 → 상세 → 브레드크럼 이동 정상.
+   - [x] 저장소를 따로 뗌 — campcar-backend 의 upgrade-center/ 폴더 → managepkm-coder/EEcenter-backend
+         한 저장소에 두 사이트가 있으면 캠카를 고칠 때마다 이 사이트까지 함께 내려받고, 배포도 폴더를 골라 옮겨야 합니다.
+         그 폴더의 커밋 두 개를 그대로 옮겨(git subtree split) 기록이 이어집니다. 옮긴 뒤 campcar-backend 에서는 폴더를 지웠습니다.
+         .env · node_modules · DB 파일 · offline/ 은 처음부터 커밋되지 않아 옮겨지지 않았습니다.
+         확인받을 것 — 이 저장소가 공개(public)로 만들어져 있습니다. 비밀번호 · 키는 없지만(.env 는 올라가지 않음) 비공개로 두려면
+         GitHub 저장소 Settings > Danger Zone > Change visibility 에서 바꿉니다.
