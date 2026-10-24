@@ -1,0 +1,39 @@
+<!--meta {"title": "견적 및 상담 문의", "heroTitle": "견적 및 상담 문의", "heroDesc": "차종과 원하시는 작업을 남겨주시면 담당자가 확인 후 연락드립니다.", "scripts": ["/assets/js/inquiry.js"]} -->
+<section class="section">
+  <div class="container narrow">
+    <form class="inquiry-form" data-kind="quote" novalidate>
+      <div class="form-errors" role="alert" hidden></div>
+
+      <fieldset>
+        <legend>연락받을 정보</legend>
+        <!--=contactFields-->
+      </fieldset>
+
+      <fieldset>
+        <legend>원하시는 작업 <span class="opt">(여러 개 고를 수 있습니다)</span></legend>
+        <div class="check-chips" id="fServices">
+          <!--=serviceCheckboxes-->
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><label for="fMessage">문의 내용</label></legend>
+        <textarea class="form-control" id="fMessage" name="message" rows="6" maxlength="2000" placeholder="현재 차량 상태, 원하시는 장비, 궁금한 점을 자유롭게 적어주세요."></textarea>
+      </fieldset>
+
+      <!--=consentField-->
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-brand btn-lg">문의 보내기</button>
+        <p class="form-help">급한 문의는 <a href="{{telHref}}">{{tel}}</a> 로 전화 주세요.</p>
+      </div>
+    </form>
+
+    <div class="form-done" hidden tabindex="-1">
+      <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+      <h2>문의가 접수되었습니다</h2>
+      <p>담당자가 확인한 뒤 남겨주신 번호로 연락드립니다.</p>
+      <a class="btn btn-outline-brand" href="/">처음으로</a>
+    </div>
+  </div>
+</section>

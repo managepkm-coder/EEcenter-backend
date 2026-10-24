@@ -1,0 +1,23 @@
+{
+  "name": "ee-upbattery-center",
+  "version": "1.0.0",
+  "description": "Korea BTS · EE Up Battery 캠핑카 업그레이드 센터 홈페이지",
+  "main": "src/server.js",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --watch src --ext js,html,sql src/server.js",
+    "check": "node scripts/check-pages.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

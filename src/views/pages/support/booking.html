@@ -1,0 +1,65 @@
+<!--meta {"title": "작업 예약 신청", "heroTitle": "작업 예약 신청", "heroDesc": "희망 날짜를 남겨주시면 작업 공간과 장비를 확인해 일정을 확정해드립니다.", "scripts": ["/assets/js/inquiry.js"]} -->
+<section class="section">
+  <div class="container narrow">
+    <div class="note-box">
+      <i class="bi bi-calendar-check" aria-hidden="true"></i>
+      <div>
+        <strong>신청만으로 예약이 확정되지는 않습니다.</strong>
+        <p>작업 내용에 따라 걸리는 시간이 달라, 담당자가 전화로 날짜와 시간을 확정해드립니다.</p>
+        <ul class="hours-list"><!--=hoursList--></ul>
+      </div>
+    </div>
+
+    <form class="inquiry-form" data-kind="booking" novalidate>
+      <div class="form-errors" role="alert" hidden></div>
+
+      <fieldset>
+        <legend>연락받을 정보</legend>
+        <!--=contactFields-->
+      </fieldset>
+
+      <fieldset>
+        <legend>받으실 작업 <span class="req">(필수)</span></legend>
+        <div class="check-chips" id="fServices">
+          <!--=serviceCheckboxes-->
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>희망 일정</legend>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label" for="fDate">희망 날짜 <span class="req">(필수)</span></label>
+            <input class="form-control" type="date" id="fDate" name="preferredDate" required>
+          </div>
+          <div class="col-md-6">
+            <span class="form-label d-block" id="fTimeLabel">희망 시간대</span>
+            <div class="time-choice" role="radiogroup" aria-labelledby="fTimeLabel">
+              <label class="check-chip"><input type="radio" name="preferredTime" value="am"><span>오전</span></label>
+              <label class="check-chip"><input type="radio" name="preferredTime" value="pm"><span>오후</span></label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><label for="fMessage">요청 사항</label></legend>
+        <textarea class="form-control" id="fMessage" name="message" rows="5" maxlength="2000" placeholder="차량 크기(대형 모터홈 · 트레일러 등), 미리 알려주실 내용을 적어주세요."></textarea>
+      </fieldset>
+
+      <!--=consentField-->
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-brand btn-lg">예약 신청하기</button>
+        <p class="form-help">급한 일정은 <a href="{{telHref}}">{{tel}}</a> 로 전화 주세요.</p>
+      </div>
+    </form>
+
+    <div class="form-done" hidden tabindex="-1">
+      <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+      <h2>예약 신청이 접수되었습니다</h2>
+      <p>담당자가 일정을 확인한 뒤 남겨주신 번호로 연락드려 확정해드립니다.</p>
+      <a class="btn btn-outline-brand" href="/">처음으로</a>
+    </div>
+  </div>
+</section>

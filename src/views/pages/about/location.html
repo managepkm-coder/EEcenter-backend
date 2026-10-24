@@ -1,0 +1,55 @@
+<!--meta {"title": "오시는 길", "heroTitle": "찾아오시는 길", "crumb": "오시는 길", "heroDesc": "안전한 여행의 시작점, 저희 센터로 오시는 길을 안내해 드립니다."} -->
+<section class="section">
+  <div class="container">
+    <!-- 지도를 화면에 바로 띄우려면 카카오맵 '지도 퍼가기' iframe 을 이 칸에 넣는다.
+         퍼가기 코드 없이도 손님이 길을 찾을 수 있게 지도 앱으로 여는 단추를 둔다(키 없이 됩니다). -->
+    <div class="map-box">
+      <i class="bi bi-geo-alt" aria-hidden="true"></i>
+      <p class="map-address">{{addressKo}}</p>
+      <p class="map-address-en">{{addressEn}}</p>
+      <div class="map-btns">
+        <!--=mapLinks-->
+      </div>
+    </div>
+
+    <div class="row g-4 mt-1">
+      <div class="col-md-6">
+        <div class="info-card">
+          <div class="info-row">
+            <span class="info-icon"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i></span>
+            <div>
+              <h3>오시는 길</h3>
+              <p>{{addressKo}}</p>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon"><i class="bi bi-car-front-fill" aria-hidden="true"></i></span>
+            <div>
+              <h3>주차 안내</h3>
+              <p>방문 전 예약해주시면 차량 크기에 맞춰 입고 자리를 안내해드립니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="info-card">
+          <div class="info-row">
+            <span class="info-icon"><i class="bi bi-telephone-fill" aria-hidden="true"></i></span>
+            <div>
+              <h3>고객센터 및 예약 문의</h3>
+              <p><a href="{{telHref}}">{{tel}}</a> (팩스 {{fax}})</p>
+              <ul class="hours-list"><!--=hoursList--></ul>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon"><i class="bi bi-envelope-fill" aria-hidden="true"></i></span>
+            <div>
+              <h3>이메일 문의</h3>
+              <p><a href="mailto:{{email}}">{{email}}</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
