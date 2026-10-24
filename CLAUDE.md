@@ -44,3 +44,15 @@ Korea BTS · EE Up Battery 캠핑카 업그레이드 센터 홈페이지입니�
          캠카와 다른 서버에 올리기로 해서(2026-10-24), 빈 Ubuntu 서버에서 Node 24 · nginx · PM2 설치 → 받기 → .env → 띄우기 →
          nginx · HTTPS · 방화벽까지 위에서부터 그대로 칠 수 있게 적었습니다. 이 작업 환경에서는 그 서버에 접속할 수 없어 대신 올리지 못합니다.
          방화벽은 OpenSSH 를 먼저 열게 했습니다 — 빠뜨리면 서버에 다시 들어갈 수 없습니다(캠카 서버에서 ufw 를 켜지 않은 이유와 같습니다).
+   - [x] 카페24 SSD 가상서버(ibizinfo1 · 58.229.163.203)에 띄움 — 아직 도메인 없음
+         우분투 22.04 · node v22.23.2 · pm2 · nginx · certbot 이 이미 있는 서버라 새로 깔지 않았습니다(node:sqlite 는 22.13 부터 옵션 없이 됩니다).
+         같은 서버에 다른 사이트가 돕니다 — nginx `campcar`(campcar.batteryall.co.kr → 3000 · pm2 webservice)와
+         `tomcat-sites`(koreabts.com · batteryall.co.kr → 8080), MySQL 3306. 그래서 SERVER.md 의 두 단계를 하지 않습니다:
+         nginx 기본 사이트 지우기 · ufw 켜기(3306 · 8080 을 쓰는 쪽이 끊길 수 있습니다).
+         위치 /var/www/ee-upbattery(서버의 다른 사이트와 같은 자리) · pm2 이름 ee-upbattery · 3300 · /health {"ok":true} · pm2 save 완료.
+         koreabts.com · batteryall.co.kr 아래 서브도메인은 쓰지 않습니다 — 다른 회사입니다. 도메인을 사면 nginx 설정 파일 `ee-upbattery` 를
+         새로 더하고 certbot --nginx -d <도메인> 으로 붙입니다(기존 두 설정 파일은 손대지 않음).
+   - [x] 운영 회사 이름을 한 곳으로 — 로고 · 바닥글 · 메인 윗줄 · 저작권 줄 (site.js 의 logoCompany · companyName)
+         업그레이드 센터는 Korea BTS 가 아니라 배터리드림이 운영합니다(2026-10-24). 'Korea BTS' 가 render.js 두 곳 · home.html 한 곳에
+         글자로 박혀 있었고 저작권 줄은 koreabts.co.kr 였습니다. 모두 site.js 에서 오게 바꿔, 회사 정보는 그 파일만 고치면 됩니다.
+         값은 아직 Korea BTS 그대로입니다 — 배터리드림의 상호 · 대표 · 사업자등록번호 · 주소 · 연락처를 받으면 바꿉니다(지어 넣지 않습니다).

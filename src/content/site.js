@@ -6,6 +6,8 @@ const company = {
   brand: 'EE Up Battery',
   brandFull: 'Electric Equipment Up Battery',
   siteName: 'EE Up Battery 캠핑카 업그레이드 센터',
+  // 로고 · 바닥글 브랜드 줄 앞에 붙는 운영 회사 이름(짧은 표기). 회사가 바뀌면 이 줄과 아래 회사 정보만 고친다.
+  logoCompany: 'Korea BTS',
   companyName: 'Korea BTS Co., Ltd.',
   ceo: 'Roberts Jang',
   bizNo: '631-88-00985',
