@@ -7,10 +7,11 @@ const company = {
   brandFull: 'Electric Equipment Up Battery',
   siteName: 'EE Up Battery 캠핑카 업그레이드 센터',
   // 로고 · 바닥글 브랜드 줄 앞에 붙는 운영 회사 이름(짧은 표기). 회사가 바뀌면 이 줄과 아래 회사 정보만 고친다.
-  logoCompany: 'Korea BTS',
-  companyName: 'Korea BTS Co., Ltd.',
-  ceo: 'Roberts Jang',
-  bizNo: '631-88-00985',
+  logoCompany: '배터리드림',
+  companyName: '(주)배터리드림',
+  ceo: '박경미',
+  bizNo: '497-81-02346',
+  // 아래 연락처 · 주소 · 운영 시간은 Korea BTS 시절 시안 값이다. 배터리드림 값을 받으면 바꾼다(2026-10-24).
   email: 'hanulkid@naver.com',
   tel: '02-6956-7074',
   fax: '02-6956-7075',
