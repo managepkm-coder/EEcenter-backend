@@ -40,6 +40,14 @@ function todayKst() {
   return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 }
 
+// 주말은 휴무라 예약 날짜로 받지 않는다(운영 시간 — site.js). 화면의 inquiry.js 와 같은 기준이다.
+// 'YYYY-MM-DD' 를 UTC 자정으로 읽어 요일을 본다 — 서버 시간대에 따라 하루가 밀리지 않게.
+// 공휴일은 해마다 날짜가 달라 막지 않는다. 신청을 받은 뒤 운영팀이 확인해 일정을 잡는다.
+function isWeekend(ymd) {
+  const day = new Date(`${ymd}T00:00:00Z`).getUTCDay();
+  return day === 0 || day === 6;
+}
+
 async function create(req, res) {
   const b = req.body || {};
   // 사람 눈에 보이지 않는 칸(website)이 채워져 오면 자동 등록 프로그램이다. 받은 척만 한다.
@@ -65,9 +73,12 @@ async function create(req, res) {
   let preferredTime = null;
   if (kind === 'booking') {
     preferredDate = typeof b.preferredDate === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(b.preferredDate) ? b.preferredDate : null;
+    // 모양만 맞고 없는 날짜(2026-02-30 같은 것)는 요일을 셀 수 없어 버린다.
+    if (preferredDate && new Date(`${preferredDate}T00:00:00Z`).toISOString().slice(0, 10) !== preferredDate) preferredDate = null;
     preferredTime = TIMES.has(b.preferredTime) ? b.preferredTime : null;
     if (!preferredDate) problems.push('희망 날짜를 골라주세요.');
     else if (preferredDate < todayKst()) problems.push('지난 날짜는 고를 수 없습니다.');
+    else if (isWeekend(preferredDate)) problems.push('주말은 휴무라 예약할 수 없습니다. 평일 날짜를 골라주세요.');
     if (!services.length) problems.push('받으실 작업을 하나 이상 골라주세요.');
   } else if (kind === 'quote' && !services.length && !message) {
     problems.push('원하시는 작업을 고르시거나 문의 내용을 적어주세요.');

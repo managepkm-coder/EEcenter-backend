@@ -26,6 +26,28 @@
   }
   if (date) date.min = todayKst();
 
+  // 주말은 휴무라 고르지 못하게 한다(서버 inquiryController 도 같은 기준). 날짜 칸은 요일만 골라 막는 기능이 없어
+  // 고른 순간 비우고 칸 아래에 알린다 — 그냥 두면 다 채우고 보낼 때에야 막힌 줄 압니다.
+  // 'YYYY-MM-DD' 를 UTC 자정으로 읽는다 — 브라우저 시간대에 따라 요일이 하루 밀리지 않게.
+  function isWeekend(ymd) {
+    var day = new Date(ymd + 'T00:00:00Z').getUTCDay();
+    return day === 0 || day === 6;
+  }
+  var dateHint = document.getElementById('fDateHint');
+  var dateHintText = dateHint ? dateHint.textContent : '';
+  if (date) {
+    date.addEventListener('change', function () {
+      if (date.value && isWeekend(date.value)) {
+        date.value = '';
+        date.setAttribute('aria-invalid', 'true');
+        if (dateHint) { dateHint.textContent = '주말은 휴무라 고를 수 없습니다. 평일 날짜를 골라주세요.'; dateHint.classList.add('is-error'); }
+      } else {
+        date.removeAttribute('aria-invalid');
+        if (dateHint) { dateHint.textContent = dateHintText; dateHint.classList.remove('is-error'); }
+      }
+    });
+  }
+
   function values() {
     var services = Array.prototype.map.call(form.querySelectorAll('[name="services"]:checked'), function (el) { return el.value; });
     var time = form.querySelector('[name="preferredTime"]:checked');
@@ -53,6 +75,7 @@
       if (!v.services.length) p.push({ el: chips, focus: chips.querySelector('input'), msg: '받으실 작업을 하나 이상 골라주세요.' });
       if (!v.preferredDate) p.push({ el: date, msg: '희망 날짜를 골라주세요.' });
       else if (v.preferredDate < todayKst()) p.push({ el: date, msg: '지난 날짜는 고를 수 없습니다.' });
+      else if (isWeekend(v.preferredDate)) p.push({ el: date, msg: '주말은 휴무라 예약할 수 없습니다. 평일 날짜를 골라주세요.' });
     } else if (!v.services.length && !v.message) {
       p.push({ el: chips, focus: chips.querySelector('input'), msg: '원하시는 작업을 고르시거나 문의 내용을 적어주세요.' });
     }
@@ -85,6 +108,8 @@
   }
 
   form.addEventListener('change', function (e) {
+    // 날짜 칸은 위의 주말 검사가 표시를 직접 맡는다 — 여기서 지우면 방금 단 '주말' 표시가 바로 사라진다.
+    if (e.target === date) return;
     if (e.target.getAttribute('aria-invalid')) e.target.removeAttribute('aria-invalid');
     if (e.target.name === 'services') document.getElementById('fServices').removeAttribute('aria-invalid');
   });

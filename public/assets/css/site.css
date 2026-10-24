@@ -353,3 +353,7 @@ body.menu-open { overflow: hidden; }
 .top-btn { position: absolute; right: 22px; top: -20px; width: 40px; height: 40px; background: var(--point-500); color: var(--navy-900); border: 0; border-radius: 6px; }
 .top-btn:hover { background: var(--point-600); }
 @media (max-width: 767.98px) { .footer-info { grid-template-columns: 1fr; } .footer-info dt { min-width: 96px; } }
+
+/* 예약 날짜 칸 아래 안내. 주말을 고르면 같은 자리에 빨간 글자로 바뀐다(#b42318 — 흰 바탕 6.6:1). */
+.date-hint { margin: 6px 0 0; font-size: .85rem; color: var(--muted); }
+.date-hint.is-error { color: #b42318; font-weight: 600; }
