@@ -1,6 +1,6 @@
 # EE Up Battery 캠핑카 업그레이드 센터 홈페이지
 
-Korea BTS · EE Up Battery 의 정보 전달용 홈페이지입니다. 캠카(campcar-backend)와 같은 방식으로 만들었습니다.
+(주)배터리드림 · EE Up Battery 의 정보 전달용 홈페이지입니다. 캠카(campcar-backend)와 같은 방식으로 만들었습니다.
 
 | | |
 | --- | --- |

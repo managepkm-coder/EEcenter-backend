@@ -281,7 +281,7 @@ const blocks = {
     return site.company.hours.map((h) => `<li><span>${esc(h.label)}</span><strong>${esc(h.value)}</strong></li>`).join('');
   },
   mapLinks() {
-    const q = encodeURIComponent(site.company.addressKo);
+    const q = encodeURIComponent(site.company.mapQuery || site.company.addressKo);
     return `<a class="btn btn-brand" href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener noreferrer">${icon('bi-geo-alt-fill')} 카카오맵에서 보기</a>
       <a class="btn btn-outline-brand" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener noreferrer">${icon('bi-map')} 네이버 지도에서 보기</a>`;
   },
