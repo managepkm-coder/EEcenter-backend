@@ -21,7 +21,7 @@ function requireAdmin(req, res, next) {
     const i = decoded.indexOf(':');
     if (i > 0 && same(decoded.slice(0, i), env.admin.user) && same(decoded.slice(i + 1), env.admin.password)) return next();
   }
-  res.set('WWW-Authenticate', 'Basic realm="EE Up Battery Admin", charset="UTF-8"');
+  res.set('WWW-Authenticate', 'Basic realm="EE Upgrade Center Admin", charset="UTF-8"');
   return res.status(401).send('로그인이 필요합니다.');
 }
 

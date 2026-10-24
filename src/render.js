@@ -59,7 +59,7 @@ function headerHtml(pathname) {
   <header class="site-header">
     <div class="site-header-inner">
       <a href="/" class="site-logo" aria-label="${esc(site.company.siteName)} 홈">
-        ${icon('bi-lightning-charge-fill')}<span class="site-logo-co">${esc(site.company.logoCompany)}</span> <span class="site-logo-brand">${esc(site.company.brand)}</span>
+        ${icon('bi-lightning-charge-fill')}<span class="site-logo-co">${esc(site.company.logoCompany)}</span> <span class="site-logo-brand">${esc(site.company.siteName)}</span>
       </a>
       <nav class="gnb" aria-label="주 메뉴">
         <ul class="gnb-list">${items}</ul>
@@ -102,7 +102,7 @@ function footerHtml() {
   </div>
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-brand">${icon('bi-lightning-charge-fill')} ${esc(c.logoCompany)} <span>${esc(c.brand)}</span></div>
+      <div class="footer-brand">${icon('bi-lightning-charge-fill')} ${esc(c.logoCompany)} <span>${esc(c.siteName)}</span></div>
       <dl class="footer-info">
         <div><dt>상호</dt><dd>${esc(c.companyName)}</dd></div>
         <div><dt>대표</dt><dd>${esc(c.ceo)}</dd></div>
@@ -291,7 +291,7 @@ const blocks = {
 function fillValues(text) {
   const c = site.company;
   const values = {
-    logoCompany: c.logoCompany, brand: c.brand, brandFull: c.brandFull, siteName: c.siteName, companyName: c.companyName,
+    logoCompany: c.logoCompany, siteName: c.siteName, companyName: c.companyName,
     ceo: c.ceo, tel: c.tel, telHref: telHref(c.tel), fax: c.fax, email: c.email,
     addressKo: c.addressKo, addressEn: c.addressEn, conversionHeadline: site.conversion.headline,
   };

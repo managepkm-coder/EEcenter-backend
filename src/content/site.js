@@ -3,9 +3,9 @@
 // 한 곳만 고치고 나머지를 놓친다(캠카 사이트에서 메뉴 하나 바꿀 때마다 34개 화면을 고쳐야 했던 자리).
 
 const company = {
-  brand: 'EE Up Battery',
-  brandFull: 'Electric Equipment Up Battery',
-  siteName: 'EE Up Battery 캠핑카 업그레이드 센터',
+  // 홈페이지 이름(2026-10-24 결정). 가운데 점은 가운뎃점(U+00B7) — 마침표(.)가 아니다.
+  // 로고 · 바닥글 · 브라우저 탭 제목 · 인사말이 모두 이 값을 쓴다.
+  siteName: 'E·E 업그레이드센터',
   // 로고 · 바닥글 브랜드 줄 앞에 붙는 운영 회사 이름(짧은 표기). 회사가 바뀌면 이 줄과 아래 회사 정보만 고친다.
   logoCompany: '배터리드림',
   companyName: '(주)배터리드림',
