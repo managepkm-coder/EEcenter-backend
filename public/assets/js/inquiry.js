@@ -96,6 +96,11 @@
     var problems = check(v);
     if (problems.length) { showErrors(problems); return; }
 
+    // 내보낸 오프라인 미리보기(file://)에는 접수를 받을 서버가 없다 — 인터넷 탓으로 읽히지 않게 따로 알린다.
+    if (location.protocol === 'file:') {
+      showErrors([{ msg: '오프라인 미리보기에서는 접수되지 않습니다. 서버에 올린 뒤에 동작합니다.' }]);
+      return;
+    }
     errorsBox.hidden = true;
     submitBtn.disabled = true;   // 두 번 눌러 같은 접수가 두 건 들어가지 않게
     var label = submitBtn.textContent;

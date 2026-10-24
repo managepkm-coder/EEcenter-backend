@@ -20,6 +20,7 @@ npm install
 npm run dev               # 개발 — 화면 · 코드를 고치면 바로 반영
 npm start                 # 운영
 npm run check             # 모든 화면을 그려보고 빈 표시 · 죽은 링크를 찾는다
+npm run export            # 오프라인 미리보기 — ./offline 폴더의 index.html 을 서버 없이 연다(접수는 안 됨)
 ```
 
 브라우저에서 http://127.0.0.1:3300 을 엽니다.
