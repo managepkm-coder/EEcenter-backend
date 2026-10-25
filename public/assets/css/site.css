@@ -46,6 +46,15 @@ a:hover { color: var(--navy-800); }
 }
 .skip-link:focus { left: 8px; }
 main:focus { outline: none; }
+/* 본문 글자 크기(2026-10-25). 글자를 1.5배로 키운 뒤 "제목은 좋은데 본문 글이 너무 크다" 해서, 본문만 20px 로 맞춘다
+   (넓은 화면 기준 글자 24px 의 .84 · 휴대폰 · 태블릿은 기준이 20px 이라 1). 제목 · 배너 · 머리말 · 바닥글은 rem 이라 그대로다.
+   본문 안의 작은 글(설명 · 날짜 · 안내)은 rem 이 아니라 em 으로 적어 이 크기를 따라 함께 줄어든다 — rem 으로 두면 본문(20px)보다
+   설명(21~22px)이 더 커지는 일이 생긴다(재서 확인함). 새 본문 글 규칙을 더할 때도 em 으로 적는다. */
+main { font-size: .84rem; }
+@media (max-width: 991.98px) { main { font-size: 1rem; } }
+.sub-hero { font-size: 1rem; }   /* 서브 배너는 main 안에 있지만 본문이 아니다 — 배너 설명 글은 줄이지 않는다 */
+/* 입력칸도 본문과 같은 크기로 — Bootstrap 은 1rem(24px)이라 그대로면 칸 이름(20px)보다 칸 안 글자가 더 크다 */
+main .form-control, main .form-select { font-size: 1em; }
 
 /* ---------- 버튼 ---------- */
 .btn-brand { background: var(--point-500); border-color: var(--point-500); color: var(--navy-900); font-weight: 700; }
@@ -173,7 +182,7 @@ body.menu-open { overflow: hidden; }
 .h-section { font-size: 1.75rem; font-weight: 800; color: var(--navy-800); margin-bottom: 14px; }
 .h-block { font-size: 1.35rem; font-weight: 800; color: var(--navy-800); padding-bottom: 10px; border-bottom: 2px solid var(--navy-800); margin-bottom: 18px; }
 .narrow { max-width: 880px; }
-.note-text { color: var(--muted); font-size: .92rem; margin-top: 20px; text-align: center; }
+.note-text { color: var(--muted); font-size: .92em; margin-top: 20px; text-align: center; }
 .empty-note { background: var(--soft); border: 1px dashed #c8d1db; border-radius: 10px; padding: 34px 20px; text-align: center; color: var(--muted); margin: 0; grid-column: 1 / -1; }
 .section-soft .empty-note { background: #fff; }
 @media (max-width: 767.98px) { .section { padding: 48px 0; } .section-head h2 { font-size: 1.45rem; } }
@@ -189,8 +198,8 @@ body.menu-open { overflow: hidden; }
 .service-card-icon { width: 60px; height: 60px; flex: 0 0 60px; border-radius: 50%; background: var(--point-50); color: var(--point-icon); display: inline-flex; align-items: center; justify-content: center; font-size: 1.6rem; }
 .service-card .service-card-icon { margin-bottom: 16px; }
 .service-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-800); margin-bottom: 8px; }
-.service-card p { font-size: .87rem; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
-.service-card-more { font-size: .85rem; font-weight: 700; color: var(--point-700); }
+.service-card p { font-size: .87em; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
+.service-card-more { font-size: .85em; font-weight: 700; color: var(--point-700); }
 @media (max-width: 1199.98px) { .service-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 767.98px) { .service-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 479.98px) { .service-grid { grid-template-columns: 1fr; } }
@@ -199,7 +208,7 @@ body.menu-open { overflow: hidden; }
 .service-row { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
 .service-row-head { display: flex; gap: 16px; align-items: center; }
 .service-row-head h3 { font-size: 1.15rem; font-weight: 800; color: var(--navy-800); margin: 0 0 4px; }
-.service-row-head p { margin: 0; color: var(--muted); font-size: .9rem; }
+.service-row-head p { margin: 0; color: var(--muted); font-size: .9em; }
 .service-row-items { margin: 0; padding-left: 1.2rem; color: #3f4954; flex: 1; }
 .service-row-items li { margin: 4px 0; }
 .service-row .btn { align-self: flex-start; }
@@ -211,7 +220,7 @@ body.menu-open { overflow: hidden; }
 .step { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px 18px 18px 64px; position: relative; display: flex; flex-direction: column; gap: 4px; }
 .step-no { position: absolute; left: 18px; top: 18px; width: 32px; height: 32px; border-radius: 50%; background: var(--point-500); color: var(--navy-900); font-weight: 800; display: flex; align-items: center; justify-content: center; }
 .step strong { color: var(--navy-800); }
-.step span:last-child { color: var(--muted); font-size: .88rem; }
+.step span:last-child { color: var(--muted); font-size: .88em; }
 .steps-row .step { padding: 60px 16px 18px; text-align: center; }
 .steps-row .step-no { left: 50%; transform: translateX(-50%); }
 @media (max-width: 991.98px) { .steps-row { grid-template-columns: 1fr; } .steps-row .step { padding: 18px 18px 18px 64px; text-align: left; } .steps-row .step-no { left: 18px; transform: none; } }
@@ -228,10 +237,7 @@ body.menu-open { overflow: hidden; }
 .photo-slot .bi { font-size: 2.2rem; }
 .greeting-img { width: 100%; min-height: 400px; border-radius: 12px; object-fit: cover; }
 .greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 24px; }
-/* 인사말 본문은 30% 줄인다(2026-10-25 요청 — 1.5배로 키운 뒤 이 문단만 너무 커 보였다). 넓은 화면 24 → 약 17px.
-   휴대폰 · 태블릿은 글자 기준이 20px 이라 .7rem 이면 14px 로 원래(16px)보다 작아져 .85rem(17px)로 둔다. */
-.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; font-size: .7rem; }
-@media (max-width: 991.98px) { .greeting-text { font-size: .85rem; } }
+.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
 @media (max-width: 767.98px) { .greeting-img { min-height: 240px; } }
 
@@ -240,13 +246,13 @@ body.menu-open { overflow: hidden; }
 .facility-img { height: 240px; width: 100%; object-fit: cover; }
 .facility-body { padding: 24px; text-align: center; }
 .facility-body h3 { font-size: 1.08rem; font-weight: 800; color: var(--navy-800); margin-bottom: 12px; }
-.facility-body p { color: var(--muted); font-size: .9rem; line-height: 1.7; margin: 0; }
+.facility-body p { color: var(--muted); font-size: .9em; line-height: 1.7; margin: 0; }
 
 /* ---------- 오시는 길 ---------- */
 .map-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 48px 20px; text-align: center; }
 .map-box > .bi { font-size: 2.4rem; color: var(--point-icon); }
 .map-address { font-size: 1.2rem; font-weight: 800; color: var(--navy-800); margin: 10px 0 4px; }
-.map-address-en { color: var(--muted); font-size: .88rem; margin-bottom: 20px; }
+.map-address-en { color: var(--muted); font-size: .88em; margin-bottom: 20px; }
 .map-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .info-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 26px; height: 100%; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
 .info-row { display: flex; gap: 16px; align-items: flex-start; }
@@ -254,12 +260,12 @@ body.menu-open { overflow: hidden; }
 .info-icon { width: 42px; height: 42px; flex: 0 0 42px; border-radius: 50%; background: var(--point-500); color: var(--navy-900); display: inline-flex; align-items: center; justify-content: center; }
 .info-row h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-800); margin: 0 0 4px; }
 .info-row p { margin: 0; color: #4a5561; }
-.hours-list { list-style: none; padding: 0; margin: 8px 0 0; font-size: .92rem; }
+.hours-list { list-style: none; padding: 0; margin: 8px 0 0; font-size: .92em; }
 .hours-list li { display: flex; gap: 12px; color: #4a5561; }
 .hours-list li span { min-width: 62px; color: var(--muted); }
 
 /* ---------- 서비스 상세 ---------- */
-.lead-text { font-size: 1.12rem; line-height: 1.8; color: #3f4954; margin-bottom: 28px; }
+.lead-text { font-size: 1.12em; line-height: 1.8; color: #3f4954; margin-bottom: 28px; }
 .detail-items { display: grid; gap: 14px; }
 .detail-item { border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; }
 .detail-item h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-800); margin-bottom: 6px; }
@@ -267,10 +273,10 @@ body.menu-open { overflow: hidden; }
 .detail-item p { margin: 0; color: var(--muted); line-height: 1.7; }
 .aside-card { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 24px; }
 .aside-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-800); margin-bottom: 10px; }
-.aside-card p { color: var(--muted); font-size: .92rem; }
+.aside-card p { color: var(--muted); font-size: .92em; }
 .aside-tel { margin: 14px 0 0; text-align: center; font-weight: 700; }
 .chip-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 30px; background: #fff; border: 1px solid var(--line); color: #3f4954; text-decoration: none; font-size: .88rem; }
+.chip-link { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 30px; background: #fff; border: 1px solid var(--line); color: #3f4954; text-decoration: none; font-size: .88em; }
 .chip-link:hover { border-color: var(--point-500); color: var(--point-700); }
 @media (min-width: 992px) { .aside-card:first-child { position: sticky; top: calc(var(--header-h) + 20px); } }
 
@@ -283,12 +289,12 @@ body.menu-open { overflow: hidden; }
 .gallery-card { margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
 .gallery-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .gallery-card figcaption { padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
-.gallery-card figcaption span { color: var(--muted); font-size: .88rem; }
+.gallery-card figcaption span { color: var(--muted); font-size: .88em; }
 .ba-grid { display: grid; gap: 18px; }
 .ba-card { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .ba-card figure { margin: 0; position: relative; }
 .ba-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; }
-.ba-card figcaption { position: absolute; left: 10px; top: 10px; background: rgba(20,32,44,.85); color: #fff; padding: 2px 10px; border-radius: 4px; font-size: .8rem; font-weight: 700; }
+.ba-card figcaption { position: absolute; left: 10px; top: 10px; background: rgba(20,32,44,.85); color: #fff; padding: 2px 10px; border-radius: 4px; font-size: .8em; font-weight: 700; }
 .ba-card p { grid-column: 1 / -1; margin: 0; font-weight: 700; }
 @media (max-width: 991.98px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 575.98px) { .gallery-grid { grid-template-columns: 1fr; } }
@@ -308,7 +314,7 @@ body.menu-open { overflow: hidden; }
 .faq-item summary::after, .notice-list summary::after { content: '+'; margin-left: auto; color: var(--muted); font-weight: 800; }
 .faq-item[open] summary::after, .notice-list details[open] summary::after { content: '−'; }
 .faq-item p, .notice-list p { margin: 0; padding: 0 20px 18px 44px; color: #4a5561; line-height: 1.8; white-space: pre-line; }
-.notice-list time { color: var(--muted); font-weight: 500; font-size: .88rem; }
+.notice-list time { color: var(--muted); font-weight: 500; font-size: .88em; }
 .help-box { margin-top: 48px; background: var(--soft); border-radius: 12px; padding: 28px; text-align: center; }
 .help-box p { font-weight: 700; margin-bottom: 14px; }
 
@@ -330,11 +336,11 @@ body.menu-open { overflow: hidden; }
 .form-errors ul { margin: 6px 0 0; padding-left: 1.2rem; }
 .consent-box { background: var(--soft); border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin-bottom: 28px; }
 .consent-title { font-weight: 800; margin-bottom: 8px; }
-.consent-box ul { color: var(--muted); font-size: .9rem; padding-left: 1.2rem; margin-bottom: 12px; }
-.consent-more { font-size: .85rem; display: inline-block; margin-top: 6px; }
+.consent-box ul { color: var(--muted); font-size: .9em; padding-left: 1.2rem; margin-bottom: 12px; }
+.consent-more { font-size: .85em; display: inline-block; margin-top: 6px; }
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-submit { text-align: center; }
-.form-help { color: var(--muted); font-size: .9rem; margin: 14px 0 0; }
+.form-help { color: var(--muted); font-size: .9em; margin: 14px 0 0; }
 .form-done { text-align: center; padding: 50px 20px; }
 .form-done[hidden] { display: none; }
 .form-done > .bi { font-size: 3rem; color: var(--point-icon); }
@@ -348,7 +354,7 @@ body.menu-open { overflow: hidden; }
 /* ---------- 약관 ---------- */
 .legal h2 { font-size: 1.1rem; font-weight: 800; color: var(--navy-800); margin: 28px 0 10px; }
 .legal p { color: #4a5561; line-height: 1.85; }
-.legal-date { margin-top: 36px; color: var(--muted); font-size: .9rem; }
+.legal-date { margin-top: 36px; color: var(--muted); font-size: .9em; }
 .nf-code { font-size: 4rem; font-weight: 800; color: var(--point-icon); margin: 0; }
 
 /* ---------- 떠 있는 단추 · 바닥글 ---------- */
@@ -375,5 +381,5 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 767.98px) { .footer-info { grid-template-columns: 1fr; } .footer-info dt { min-width: 96px; } }
 
 /* 예약 날짜 칸 아래 안내. 주말을 고르면 같은 자리에 빨간 글자로 바뀐다(#b42318 — 흰 바탕 6.6:1). */
-.date-hint { margin: 6px 0 0; font-size: .85rem; color: var(--muted); }
+.date-hint { margin: 6px 0 0; font-size: .85em; color: var(--muted); }
 .date-hint.is-error { color: #b42318; font-weight: 600; }
