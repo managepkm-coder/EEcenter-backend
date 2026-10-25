@@ -135,9 +135,19 @@ main .form-control, main .form-select { font-size: 1em; }
 .full-menu-close { background: none; border: 0; font-size: 1.5rem; color: var(--muted); padding: 4px 8px; }
 .full-menu-close:hover { color: var(--ink); }
 .sitemap-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
-.sitemap-col { background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 18px 14px; }
-.sitemap-title { font-size: 1rem; font-weight: 800; color: var(--navy-800); padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid var(--point-500); }
-.sitemap-title .bi { color: var(--point-icon); }
+/* 제목이 한 줄인 칸과 두 줄인 칸('2. 업그레이드 운영내용')이 섞이면 노란 밑줄과 그 아래 목록이 칸마다 다른 높이에 섰다(2026-10-25 요청).
+   칸을 바깥 격자의 두 줄(제목 · 목록)에 걸쳐 앉혀(subgrid) 같은 줄의 제목 칸이 가장 긴 제목 높이로 함께 맞춰진다 —
+   밑줄 · 목록 첫 줄이 한 줄로 선다. 칸 수가 바뀌어도(5 · 3 · 2 · 1칸) 같은 가로줄끼리만 맞추므로 숫자를 따로 적지 않는다.
+   subgrid 를 모르는 오래된 브라우저에서는 지금처럼 칸마다 제 높이로 선다(깨지지는 않는다). */
+.sitemap-col { background: #f8fafc; border: 1px solid var(--line); border-radius: 8px; padding: 18px 14px;
+  display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; align-content: start; }
+/* 두 줄로 꺾인 제목의 둘째 줄을 아이콘 · 번호 아래가 아니라 첫 줄 글자('업그레이드')와 같은 자리에서 시작하게 —
+   아이콘 · 번호 · 이름을 따로 세우고 이름 칸 안에서만 줄을 바꾼다. */
+.sitemap-title { font-size: 1rem; font-weight: 800; color: var(--navy-800); padding-bottom: 8px; margin-bottom: 10px; border-bottom: 2px solid var(--point-500);
+  display: flex; align-items: flex-start; gap: .3em; }
+.sitemap-title .bi { color: var(--point-icon); flex-shrink: 0; }
+.sitemap-no { flex-shrink: 0; }
+.sitemap-name { min-width: 0; }
 .sitemap-list { list-style: none; margin: 0; padding: 0; }
 .sitemap-list a { display: block; padding: 6px 8px; border-radius: 4px; color: #475569; text-decoration: none; font-size: .92rem; }
 .sitemap-list a:hover, .sitemap-list a:focus-visible { background: var(--line); color: var(--ink); font-weight: 700; }

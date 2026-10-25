@@ -81,7 +81,7 @@ function headerHtml(pathname) {
 
 function fullMenuHtml() {
   const cols = site.nav.map((n, i) => `<div class="sitemap-col">
-          <h3 class="sitemap-title">${icon(n.icon)} ${i + 1}. ${esc(n.label)}</h3>
+          <h3 class="sitemap-title">${icon(n.icon)}<span class="sitemap-no">${i + 1}.</span><span class="sitemap-name">${esc(n.label)}</span></h3>
           <ul class="sitemap-list">${n.children.map((c) => `<li><a href="${esc(c.href)}">${esc(c.label)}</a></li>`).join('')}</ul>
         </div>`).join('');
   return `<div id="fullMenu" class="full-menu" role="dialog" aria-modal="true" aria-labelledby="fullMenuTitle" hidden>
