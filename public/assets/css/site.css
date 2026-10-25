@@ -228,7 +228,10 @@ body.menu-open { overflow: hidden; }
 .photo-slot .bi { font-size: 2.2rem; }
 .greeting-img { width: 100%; min-height: 400px; border-radius: 12px; object-fit: cover; }
 .greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 24px; }
-.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }
+/* 인사말 본문은 30% 줄인다(2026-10-25 요청 — 1.5배로 키운 뒤 이 문단만 너무 커 보였다). 넓은 화면 24 → 약 17px.
+   휴대폰 · 태블릿은 글자 기준이 20px 이라 .7rem 이면 14px 로 원래(16px)보다 작아져 .85rem(17px)로 둔다. */
+.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; font-size: .7rem; }
+@media (max-width: 991.98px) { .greeting-text { font-size: .85rem; } }
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
 @media (max-width: 767.98px) { .greeting-img { min-height: 240px; } }
 
