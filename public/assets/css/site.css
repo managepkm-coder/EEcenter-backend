@@ -259,7 +259,13 @@ body.menu-open { overflow: hidden; }
 .facility-body p { color: var(--muted); font-size: .9em; line-height: 1.7; margin: 0; }
 
 /* ---------- 오시는 길 ---------- */
-.map-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 48px 20px; text-align: center; }
+.map-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 40px 20px; text-align: center; height: 100%; }
+.map-label { display: inline-block; margin: 8px 0 0; padding: 2px 14px; border-radius: 20px; background: var(--point-500); color: var(--navy-900); font-weight: 800; font-size: .9em; }
+/* 오시는 길 칸의 주소 두 줄 — 이름(본사 · 사업장)을 앞에 세워 줄을 바꿔도 주소끼리 왼쪽이 맞게 */
+.address-list { list-style: none; margin: 0; padding: 0; color: #4a5561; }
+.address-list li { display: flex; gap: 10px; }
+.address-list li + li { margin-top: 4px; }
+.address-list span { flex: 0 0 auto; min-width: 3.5em; color: var(--muted); font-weight: 700; }
 .map-box > .bi { font-size: 2.4rem; color: var(--point-icon); }
 .map-address { font-size: 1.2rem; font-weight: 800; color: var(--navy-800); margin: 10px 0 4px; }
 .map-address-en { color: var(--muted); font-size: .88em; margin-bottom: 20px; }
@@ -380,7 +386,9 @@ body.menu-open { overflow: hidden; }
 .footer-brand .bi, .footer-brand span { color: var(--point-300); }
 .footer-info { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 32px; margin: 0; }
 .footer-info div { display: flex; gap: 14px; }
-.footer-info dt { min-width: 104px; color: #dee2e6; font-weight: 600; }
+.footer-info dt { flex: 0 0 7.5em; color: #dee2e6; font-weight: 600; }   /* '사업자등록번호' 가 들어가는 폭 — 값의 왼쪽이 모든 줄에서 같게 */
+/* 주소는 길고 두 곳이라 두 칸에 나눠 앉히면 본사가 오른쪽 · 사업장이 다음 줄 왼쪽으로 갈려 읽는 차례가 꼬인다. 한 줄씩 통째로 쓴다. */
+.footer-info .footer-info-wide { grid-column: 1 / -1; }
 .footer-info dd { margin: 0; }
 .site-footer a { color: #ced4da; text-decoration: none; }
 .site-footer a:hover { color: #fff; text-decoration: underline; }
@@ -388,7 +396,9 @@ body.menu-open { overflow: hidden; }
 .footer-copy { text-align: center; margin: 22px 0 0; padding-top: 18px; border-top: 1px solid #343a40; font-size: .8rem; }
 .top-btn { position: absolute; right: 22px; top: -20px; width: 40px; height: 40px; background: var(--point-500); color: var(--navy-900); border: 0; border-radius: 6px; }
 .top-btn:hover { background: var(--point-600); }
-@media (max-width: 767.98px) { .footer-info { grid-template-columns: 1fr; } .footer-info dt { min-width: 96px; } }
+@media (max-width: 767.98px) { .footer-info { grid-template-columns: 1fr; } }
+/* 휴대폰에서는 이름 칸(7.5em)이 값 자리를 절반 가까이 먹어 '돈산리 / 7-1' · 이메일이 낱말 가운데서 꺾였다 — 이름을 값 위에 둔다 */
+@media (max-width: 575.98px) { .footer-info div { flex-direction: column; gap: 0; } .footer-info div + div { margin-top: 6px; } .footer-info dt { flex-basis: auto; } }
 
 /* 예약 날짜 칸 아래 안내. 주말을 고르면 같은 자리에 빨간 글자로 바뀐다(#b42318 — 흰 바탕 6.6:1). */
 .date-hint { margin: 6px 0 0; font-size: .85em; color: var(--muted); }

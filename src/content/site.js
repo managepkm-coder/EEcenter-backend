@@ -14,10 +14,22 @@ const company = {
   email: 'batterydoctors@naver.com',
   tel: '010-3326-6119',
   fax: '02-6956-7075',
-  addressKo: '인천광역시 부평구 백범로577번길 20, 경인센터 213, 214호',
-  // 지도 검색은 건물 주소만 넣는다 — 호수('213, 214호')까지 넣으면 카카오맵 · 네이버 지도가 건물을 못 찾는다.
-  mapQuery: '인천광역시 부평구 백범로577번길 20',
-  addressEn: 'Rooms 213 and 214, Gyeongin Center, 20 Baekbeom-ro 577beon-gil, Bupyeong-gu, Incheon, Korea',
+  // 주소 두 곳 — 본사(인천)와 사업장(충주)(2026-11-04). 바닥글 · 오시는 길이 이 목록을 그대로 그린다.
+  // 지도 단추는 mapQuery 로 찾는다 — 호수('213, 214호')까지 넣으면 카카오맵 · 네이버 지도가 건물을 못 찾는다.
+  addresses: [
+    {
+      label: '본사',
+      ko: '인천광역시 부평구 백범로577번길 20, 경인센터 213, 214호',
+      mapQuery: '인천광역시 부평구 백범로577번길 20',
+      en: 'Rooms 213 and 214, Gyeongin Center, 20 Baekbeom-ro 577beon-gil, Bupyeong-gu, Incheon, Korea',
+    },
+    {
+      label: '사업장',
+      ko: '충북 충주시 앙성면 돈산리 7-1',
+      mapQuery: '충북 충주시 앙성면 돈산리 7-1',
+      en: '7-1 Donsan-ri, Angseong-myeon, Chungju-si, Chungcheongbuk-do, Korea',
+    },
+  ],
   hours: [
     { label: '평일', value: '09:00 ~ 18:00' },
     { label: '주말 · 공휴일', value: '휴무' },

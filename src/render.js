@@ -108,10 +108,10 @@ function footerHtml() {
         <div><dt>상호</dt><dd>${esc(c.companyName)}</dd></div>
         <div><dt>대표</dt><dd>${esc(c.ceo)}</dd></div>
         <div><dt>사업자등록번호</dt><dd>${esc(c.bizNo)}</dd></div>
-        <div><dt>주소</dt><dd>${esc(c.addressKo)}</dd></div>
         <div><dt>전화</dt><dd><a href="${telHref(c.tel)}">${esc(c.tel)}</a></dd></div>
         <div><dt>팩스</dt><dd>${esc(c.fax)}</dd></div>
         <div><dt>이메일</dt><dd><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></dd></div>
+        ${c.addresses.map((a) => `<div class="footer-info-wide"><dt>${esc(a.label)} 주소</dt><dd>${esc(a.ko)}</dd></div>`).join('')}
       </dl>
       <p class="footer-links"><a href="/privacy">개인정보처리방침</a> <span aria-hidden="true">|</span> <a href="/about/location">오시는 길</a></p>
       <p class="footer-copy">Copyright &copy; <b>${esc(c.companyName)}</b> All rights reserved ${new Date().getFullYear()}.</p>
@@ -281,10 +281,24 @@ const blocks = {
   hoursList() {
     return site.company.hours.map((h) => `<li><span>${esc(h.label)}</span><strong>${esc(h.value)}</strong></li>`).join('');
   },
-  mapLinks() {
-    const q = encodeURIComponent(site.company.mapQuery || site.company.addressKo);
-    return `<a class="btn btn-brand" href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener noreferrer">${icon('bi-geo-alt-fill')} 카카오맵에서 보기</a>
-      <a class="btn btn-outline-brand" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener noreferrer">${icon('bi-map')} 네이버 지도에서 보기</a>`;
+  // 주소마다 지도 칸 하나 — 본사 · 사업장(site.js 의 addresses). 지도 단추 이름에 어느 곳인지 넣어 읽기 프로그램이 두 쌍을 가를 수 있게 한다.
+  mapBoxes() {
+    return site.company.addresses.map((a) => {
+      const q = encodeURIComponent(a.mapQuery || a.ko);
+      return `<div class="col-lg-6"><div class="map-box">
+        ${icon('bi-geo-alt')}
+        <p class="map-label">${esc(a.label)}</p>
+        <p class="map-address">${esc(a.ko)}</p>
+        <p class="map-address-en">${esc(a.en)}</p>
+        <div class="map-btns">
+          <a class="btn btn-brand" href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener noreferrer" aria-label="${esc(a.label)} 카카오맵에서 보기">${icon('bi-geo-alt-fill')} 카카오맵</a>
+          <a class="btn btn-outline-brand" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener noreferrer" aria-label="${esc(a.label)} 네이버 지도에서 보기">${icon('bi-map')} 네이버 지도</a>
+        </div>
+      </div></div>`;
+    }).join('');
+  },
+  addressList() {
+    return site.company.addresses.map((a) => `<li><span>${esc(a.label)}</span>${esc(a.ko)}</li>`).join('');
   },
 };
 
@@ -294,7 +308,7 @@ function fillValues(text) {
   const values = {
     logoCompany: c.logoCompany, siteName: c.siteName, companyName: c.companyName,
     ceo: c.ceo, tel: c.tel, telHref: telHref(c.tel), fax: c.fax, email: c.email,
-    addressKo: c.addressKo, addressEn: c.addressEn, conversionHeadline: site.conversion.headline,
+    conversionHeadline: site.conversion.headline,
   };
   return text.replace(/\{\{(\w+)\}\}/g, (all, key) => (key in values ? esc(values[key]) : all));
 }

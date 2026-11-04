@@ -3,14 +3,7 @@
   <div class="container">
     <!-- 지도를 화면에 바로 띄우려면 카카오맵 '지도 퍼가기' iframe 을 이 칸에 넣는다.
          퍼가기 코드 없이도 손님이 길을 찾을 수 있게 지도 앱으로 여는 단추를 둔다(키 없이 됩니다). -->
-    <div class="map-box">
-      <i class="bi bi-geo-alt" aria-hidden="true"></i>
-      <p class="map-address">{{addressKo}}</p>
-      <p class="map-address-en">{{addressEn}}</p>
-      <div class="map-btns">
-        <!--=mapLinks-->
-      </div>
-    </div>
+    <div class="row g-4"><!--=mapBoxes--></div>
 
     <div class="row g-4 mt-1">
       <div class="col-md-6">
@@ -19,7 +12,7 @@
             <span class="info-icon"><i class="bi bi-geo-alt-fill" aria-hidden="true"></i></span>
             <div>
               <h3>오시는 길</h3>
-              <p>{{addressKo}}</p>
+              <ul class="address-list"><!--=addressList--></ul>
             </div>
           </div>
           <div class="info-row">
