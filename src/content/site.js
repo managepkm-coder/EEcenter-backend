@@ -122,6 +122,8 @@ const gallery = [];
 const notices = [];
 
 // 메뉴. href 의 # 은 그 화면 안의 구역이다.
+// 메뉴 차례 — 회사 소개 · 부품 및 쇼핑몰 · 업그레이드 운영내용 · 시공 갤러리 · 고객 센터(2026-11-15 요청).
+// 머리말 · 전체메뉴(번호 1~5 는 이 차례로 매겨짐) · 바닥글이 모두 이 목록을 그대로 따른다.
 const nav = [
   {
     label: '회사 소개', href: '/about/greeting', icon: 'bi-building',
@@ -129,6 +131,13 @@ const nav = [
       { label: '인사말', href: '/about/greeting' },
       { label: '시설안내', href: '/about/facilities' },
       { label: '오시는 길', href: '/about/location' },
+    ],
+  },
+  {
+    label: '부품 및 쇼핑몰', href: '/shop', icon: 'bi-cart3',
+    children: [
+      { label: '취급 브랜드 안내', href: '/shop#brands' },
+      { label: '캠핑카 추천 용품', href: '/shop#recommend' },
     ],
   },
   {
@@ -145,13 +154,6 @@ const nav = [
       { label: '차종별 시공 사례', href: '/gallery' },
       { label: 'Before & After 비교', href: '/gallery#before-after' },
       { label: '이달의 튜닝', href: '/gallery#featured' },
-    ],
-  },
-  {
-    label: '부품 및 쇼핑몰', href: '/shop', icon: 'bi-cart3',
-    children: [
-      { label: '취급 브랜드 안내', href: '/shop#brands' },
-      { label: '캠핑카 추천 용품', href: '/shop#recommend' },
     ],
   },
   {
