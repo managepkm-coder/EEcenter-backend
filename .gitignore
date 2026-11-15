@@ -7,3 +7,7 @@ data/*.db-journal
 data/*.db-wal
 data/*.db-shm
 offline/
+
+# 서버의 자동 배포가 쓰는 표시 파일(scripts/auto-deploy.sh) — 저장소에 올리지 않는다
+.no-deploy
+.deploy-failed

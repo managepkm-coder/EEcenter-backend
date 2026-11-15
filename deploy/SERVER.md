@@ -85,7 +85,22 @@ ufw enable
 
 **OpenSSH 줄을 빠뜨리면 서버에 다시 접속할 수 없습니다.** 반드시 그 줄부터 칩니다.
 
-## 고친 코드를 다시 올릴 때
+## 자동 반영 (권장 — 한 번만 설정)
+
+서버가 5분마다 GitHub 을 확인해 새 커밋이 있으면 스스로 받아 재시작합니다(`scripts/auto-deploy.sh`).
+뜨지 않는 커밋이면 직전 상태로 되돌리고, 그 커밋은 다시 시도하지 않습니다.
+
+```bash
+chmod +x /var/www/ee-upbattery/scripts/auto-deploy.sh
+(crontab -l 2>/dev/null | grep -v 'ee-upbattery/scripts/auto-deploy.sh'; \
+ echo '*/5 * * * * /var/www/ee-upbattery/scripts/auto-deploy.sh >> /var/log/ee-upbattery-deploy.log 2>&1') | crontab -
+```
+
+- 기록 보기: `tail -30 /var/log/ee-upbattery-deploy.log`
+- 잠시 멈추기 / 다시 켜기: `touch /var/www/ee-upbattery/.no-deploy` / `rm /var/www/ee-upbattery/.no-deploy`
+- 서버에서 파일을 직접(FTP 등) 고치면 자동 반영이 멈춥니다 — 덮어쓰지 않기 위해서입니다. 기록에 그 사정이 남습니다.
+
+## 고친 코드를 손으로 다시 올릴 때
 
 ```bash
 cd /root/www/ee-upbattery
