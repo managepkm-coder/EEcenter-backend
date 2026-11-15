@@ -14,6 +14,9 @@
   --point-50: #eff6ff;    /* 옅은 판 */
   --point-line: #bfdbfe;  /* 옅은 판 테두리 */
   --on-point: #ffffff;    /* 칠한 블루 위 글자 */
+  /* 머리말 · 안내 띠 · 메인 배너 · 서브 배너 · 상담 띠의 바탕 — 청록빛 블루에서 블루로(2026-11-15, 보내주신 마이클리닝 화면처럼).
+     보내주신 화면의 밝은 청록(#06b6d4)은 흰 글자가 2.4:1 이라 읽히지 않아 한 단계 짙은 #0a7bc2(흰 글자 4.5:1)에서 시작한다. 끝 #2563eb 는 5.2:1. */
+  --brand-gradient: linear-gradient(120deg, #0a7bc2 0%, #2563eb 100%);
   --ink: #1f2933;
   --muted: #5b6774;    /* 흰 바탕 5.9:1 */
   --line: #e2e8f0;
@@ -42,7 +45,8 @@ a:hover { color: var(--navy-800); }
 /* 키보드로 다니는 사람에게 지금 어디 있는지 보이게 */
 :focus-visible { outline: 3px solid var(--point-icon); outline-offset: 2px; }   /* 흰 바탕 5.2:1 */
 /* 어두운 바탕(머리말 · 바닥글 · 배너 · 상담 띠) 위에서는 짙은 블루가 2.8:1 로 묻혀 밝은 블루로 그린다(6.9:1) */
-.site-header :focus-visible, .site-footer :focus-visible, .main-hero :focus-visible, .sub-hero :focus-visible, .cta-band :focus-visible { outline-color: var(--point-300); }
+.site-footer :focus-visible { outline-color: var(--point-300); }
+.site-header :focus-visible, .notice-bar :focus-visible, .main-hero :focus-visible, .sub-hero :focus-visible, .cta-band :focus-visible { outline-color: #fff; }   /* 블루 바탕 위 4.5:1 이상 */
 .skip-link {
   position: absolute; left: -9999px; top: 8px; z-index: 2000;
   background: var(--white); color: var(--navy-800); padding: 8px 14px; border-radius: 6px; font-weight: 700;
@@ -60,29 +64,36 @@ main { font-size: .84rem; }
 main .form-control, main .form-select { font-size: 1em; }
 
 /* ---------- 버튼 ---------- */
+/* 단추는 모두 둥근 알약 모양(보내주신 화면처럼) */
+.btn-brand, .btn-outline-brand, .btn-ghost, .btn-white { border-radius: 999px; padding-left: 1.4em; padding-right: 1.4em; }
 .btn-brand { background: var(--point-500); border-color: var(--point-500); color: var(--on-point); font-weight: 700; }
 .btn-brand:hover, .btn-brand:focus-visible { background: var(--point-600); border-color: var(--point-600); color: var(--on-point); }
 .btn-outline-brand { border: 2px solid var(--point-500); color: var(--point-700); font-weight: 700; background: transparent; }
 .btn-outline-brand:hover { background: var(--point-500); color: var(--on-point); }
 .btn-ghost { border: 2px solid rgba(255,255,255,.85); color: #fff; font-weight: 700; }
 .btn-ghost:hover { background: rgba(255,255,255,.15); color: #fff; }
+/* 블루 바탕(메인 배너 · 상담 띠) 위의 첫째 단추 — 블루 단추는 바탕에 묻혀 흰 단추에 블루 글자로 뒤집는다(6.7:1) */
+.btn-white { background: #fff; border: 2px solid #fff; color: var(--point-700); font-weight: 800; }
+.btn-white:hover, .btn-white:focus-visible { background: var(--point-50); border-color: var(--point-50); color: var(--point-700); }
 
 /* ---------- 머리말 ---------- */
 /* 머리말은 글자 크기를 px 로 고정하고 안쪽은 em 으로 잰다. 본문처럼 1.5배로 키우면 메뉴 다섯 칸이 1440px 에서도
    한 줄에 들어가지 않아 글자가 세로로 꺾인다(확인함). 그래도 전보다 조금 키웠다(16 → 18px). */
-.site-header { font-size: 18px; position: sticky; top: 0; z-index: 1000; background: var(--navy-800); color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.15); }
+.site-header { font-size: 18px; position: sticky; top: 0; z-index: 1000; background: var(--brand-gradient); background-attachment: fixed; color: #fff; border-bottom: 1px solid rgba(255,255,255,.22); }
+/* 머리말 · 안내 띠 · 배너가 같은 그라데이션을 화면 기준(fixed)으로 깔아 이음매 없이 한 판으로 보이게 한다. iOS Safari 는 fixed 를 무시해
+   칸마다 제 그라데이션을 그리는데, 이음매가 조금 보일 뿐 글자 대비는 같다. */
 .site-header-inner { display: flex; align-items: center; justify-content: space-between; height: var(--header-h); padding: 0 28px; gap: 16px; }
 .site-logo { display: flex; align-items: center; gap: 8px; color: #fff; font-size: 1.2em; font-weight: 800; text-decoration: none; white-space: nowrap; }
 .site-logo:hover { color: #fff; }
-.site-logo .bi { color: var(--point-300); }
-.site-logo-brand { color: var(--point-300); }
+.site-logo .bi { color: #fff; }
+.site-logo-brand { color: #fff; }   /* 블루 바탕이라 밝은 블루 글자는 묻힌다 — 흰색으로 */
 
 .gnb { height: 100%; }
 .gnb-list { list-style: none; margin: 0; padding: 0; display: flex; height: 100%; }
 .gnb-item { position: relative; display: flex; align-items: center; }
-.gnb-link { display: flex; align-items: center; height: 100%; padding: 0 18px; color: #e2e8f0; font-weight: 600; text-decoration: none; transition: background .2s; }
-.gnb-item:hover > .gnb-link, .gnb-item:focus-within > .gnb-link, .gnb-item.is-active > .gnb-link { color: #fff; background: var(--navy-900); }
-.gnb-item.is-active > .gnb-link { box-shadow: inset 0 -3px 0 var(--point-500); }
+.gnb-link { display: flex; align-items: center; height: 100%; padding: 0 18px; color: #fff; font-weight: 600; text-decoration: none; transition: background .2s; }
+.gnb-item:hover > .gnb-link, .gnb-item:focus-within > .gnb-link, .gnb-item.is-active > .gnb-link { color: #fff; background: rgba(8,30,80,.22); }   /* 밝게 띄우면 흰 글자 대비가 떨어져 어둡게 눌러 표시한다 */
+.gnb-item.is-active > .gnb-link { box-shadow: inset 0 -3px 0 #fff; }
 /* 마우스를 올리거나 키보드로 들어오면 펼친다(focus-within). 클릭으로 여닫는 스크립트를 두지 않아도 된다. */
 .gnb-dropdown {
   display: none; position: absolute; top: 100%; left: 0; min-width: 210px; list-style: none; margin: 0; padding: 10px 0;
@@ -94,14 +105,14 @@ main .form-control, main .form-select { font-size: 1em; }
 .gnb-dropdown a[aria-current="page"] { color: var(--point-700); font-weight: 700; }
 
 .site-header-actions { display: flex; align-items: center; gap: 12px; }
-.header-tel { color: #e2e8f0; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.header-tel { color: #fff; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .header-tel:hover { color: #fff; }
-.btn-all-menu { white-space: nowrap; flex-shrink: 0; background: var(--point-500); color: var(--on-point); border: 0; border-radius: 4px; padding: 10px 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
-.btn-all-menu:hover { background: var(--point-600); }
+.btn-all-menu { white-space: nowrap; flex-shrink: 0; background: #fff; color: var(--point-700); border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.btn-all-menu:hover { background: var(--point-50); }   /* 보내주신 화면의 '앱 다운로드' 처럼 흰 알약 · 블루 글자 6.7:1 */
 
-.notice-bar { background: var(--point-50); border-bottom: 1px solid var(--point-line); padding: 12px 20px; text-align: center; font-size: .92rem; color: #1e3a8a; }   /* 옅은 블루 판 위 9.5:1 */
-.notice-bar .bi { color: var(--point-icon); margin-right: 6px; }
-.notice-bar strong { color: var(--point-700); }
+.notice-bar { background: var(--brand-gradient); background-attachment: fixed; border-bottom: 1px solid rgba(255,255,255,.22); padding: 12px 20px; text-align: center; font-size: .92rem; color: #fff; }
+.notice-bar .bi { color: #fff; margin-right: 6px; }
+.notice-bar strong { color: #fff; }
 
 /* 넓은 메뉴 다섯 칸이 들어가지 않는 폭에서는 '전체메뉴' 하나로 모은다.
    머리말 글자를 18px 로 키운 뒤(2026-10-24) 메뉴 · 로고 · 전화 · 단추를 합치면 1340px 가량이라 1400px 부터 펼친다.
@@ -162,25 +173,25 @@ body.menu-open { overflow: hidden; }
 /* ---------- 메인 히어로 ---------- */
 .main-hero {
   color: #fff; text-align: center; padding: 110px 0;
-  /* 사진 위 흰 글자가 읽히게 짙은 남색을 덮는다(제목 · 설명 모두 7:1 이상) */
-  background: linear-gradient(rgba(10,25,45,.80), rgba(10,25,45,.86)), url('/assets/images/hero-workshop.jpg') center/cover no-repeat, var(--navy-800);
+    /* 사진 대신 그라데이션 한 판(2026-11-15) — 보내주신 화면처럼. 사진(hero-workshop.jpg)은 파일로 남겨 둔다. */
+  background: var(--brand-gradient); background-attachment: fixed;
 }
-.hero-tag { display: inline-block; background: rgba(37,99,235,.22); border: 1px solid var(--point-500); color: var(--point-300); padding: 6px 16px; border-radius: 30px; font-size: .9rem; font-weight: 700; margin-bottom: 20px; }
-.main-hero h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.3; margin-bottom: 18px; }
-.main-hero p { font-size: 1.08rem; color: #d5dde6; max-width: 680px; margin: 0 auto 34px; line-height: 1.7; }
+.hero-tag { display: inline-block; color: #fff; font-size: 1.05rem; font-weight: 800; margin-bottom: 14px; }
+.main-hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 22px; }
+.main-hero p { font-size: 1.08rem; color: #fff; max-width: 680px; margin: 0 auto 34px; line-height: 1.7; }
 .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
-@media (max-width: 767.98px) { .main-hero { padding: 72px 0; } .main-hero h1 { font-size: 1.75rem; } }
+@media (max-width: 767.98px) { .main-hero { padding: 72px 0; } .main-hero h1 { font-size: 2rem; } }
 
 /* ---------- 서브 배너 (모든 서브 화면이 같은 높이) ---------- */
-.sub-hero { background: var(--navy-800); color: #fff; padding: 46px 0 52px; min-height: 200px; display: flex; align-items: center; }
+.sub-hero { background: var(--brand-gradient); background-attachment: fixed; color: #fff; padding: 46px 0 52px; min-height: 200px; display: flex; align-items: center; }
 .sub-hero .container { text-align: center; }
-.sub-crumb { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 0; margin: 0 0 14px; font-size: .85rem; color: #b9c4d0; }
-.sub-crumb li + li::before { content: '›'; margin-right: 6px; color: #8796a6; }
-.sub-crumb a { color: #d5dde6; text-decoration: none; }
+.sub-crumb { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 0; margin: 0 0 14px; font-size: .85rem; color: #fff; }
+.sub-crumb li + li::before { content: '›'; margin-right: 6px; color: #fff; }
+.sub-crumb a { color: #fff; text-decoration: none; }
 .sub-crumb a:hover { color: #fff; text-decoration: underline; }
-.sub-crumb [aria-current] { color: var(--point-300); font-weight: 700; }
+.sub-crumb [aria-current] { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }   /* 색으로 가르지 못해 밑줄로 */
 .sub-hero-title { font-size: 2.1rem; font-weight: 800; margin: 0 0 10px; }
-.sub-hero-desc { margin: 0 auto; max-width: 720px; color: #d5dde6; }
+.sub-hero-desc { margin: 0 auto; max-width: 720px; color: #fff; }
 @media (max-width: 575.98px) { .sub-hero { min-height: 170px; padding: 34px 0 40px; } .sub-hero-title { font-size: 1.6rem; } }
 
 /* ---------- 구역 ---------- */
@@ -239,9 +250,9 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 991.98px) { .steps-row { grid-template-columns: 1fr; } .steps-row .step { padding: 18px 18px 18px 64px; text-align: left; } .steps-row .step-no { left: 18px; transform: none; } }
 
 /* ---------- 마지막 안내 띠 ---------- */
-.cta-band { background: var(--navy-800); color: #fff; border-radius: 14px; padding: 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.cta-band { background: var(--brand-gradient); color: #fff; border-radius: 14px; padding: 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
 .cta-band h2 { font-size: 1.45rem; font-weight: 800; margin-bottom: 6px; }
-.cta-band p { margin: 0; color: #d5dde6; }
+.cta-band p { margin: 0; color: #fff; }
 .cta-band-btns { display: flex; flex-wrap: wrap; gap: 12px; }
 @media (max-width: 575.98px) { .cta-band { padding: 28px 22px; } }
 
