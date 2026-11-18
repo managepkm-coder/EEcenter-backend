@@ -136,6 +136,74 @@ function subHeroHtml(meta, pathname) {
 }
 
 // 화면 파일의 <!--=이름--> 자리에 넣는 조각. 같은 목록(서비스 · FAQ)을 여러 화면이 쓰므로 여기서 한 번만 그린다.
+// 전기/배터리 화면의 '전기가 흐르는 길' 그림(2026-11-18 — "설명 이해를 도울 수 있는 애니메이션").
+// 글은 site.js 의 전기/배터리 항목에 적힌 내용만 옮긴다(알터네이터 8~16V · BMS 손상 · 주행 충전기가 맞춰 줌).
+// 그림이 아니라 HTML 로 그린다 — 칸 이름이 진짜 글자라 읽기 프로그램이 그대로 읽고, 좁은 화면에서는 위아래로 접힌다.
+// 선의 모양으로 뜻을 가른다(흔들리는 지그재그 = 고르지 않은 전압 · 곧은 점선 = 고른 전압). 색만으로 가르지 않는다.
+const FLOW_NODES = [
+  { key: 'alt', icon: 'bi-car-front-fill', title: '알터네이터', desc: '주행 중 발전 · 8~16V 로 오르내림' },
+  { key: 'dcdc', icon: 'bi-lightning-charge-fill', title: '주행 충전기', desc: '리튬 배터리에 맞는 전압으로 바꿔 줌' },
+  { key: 'bat', icon: 'bi-battery-charging', title: '리튬인산철 배터리', desc: 'BMS 가 과충전 · 과방전을 막음' },
+  { key: 'inv', icon: 'bi-arrow-left-right', title: '순수정현파 인버터', desc: '가전제품에 쓰는 전기로 바꿈' },
+  { key: 'load', icon: 'bi-plug-fill', title: '가전제품', desc: '냉장고 · 전기 조리기구 등' },
+];
+// 선 하나 — 고르지 않은 전압(jitter)은 지그재그(SVG), 고른 전압은 흐르는 점선(CSS 배경). 두 벌을 겹쳐 두고 CSS 가 하나만 보인다
+// (주행 충전기 없이 보기로 바꿀 때 선 모양만 바꾸면 되게).
+function flowWire(kind, extra = '') {
+  const zig = 'M0 12 L6 4 L12 19 L18 7 L24 17 L30 3 L36 14 L42 6 L48 20 L54 9 L60 16 L66 4 L72 18 L78 8 L84 15 L90 5 L96 19 L100 12';
+  const zigBoth = zig + ' ' + zig.replace(/^M0 12/, '').replace(/(\d+(?:\.\d+)?) (\d+)/g, (m, x, y) => `${Number(x) + 100} ${y}`);
+  return `<div class="flow-wire flow-wire-${kind}${extra}" aria-hidden="true">
+      <svg class="flow-svg" viewBox="0 0 100 24" preserveAspectRatio="none" focusable="false">
+        <g class="flow-zig"><path d="${zigBoth}" vector-effect="non-scaling-stroke"/></g>
+      </svg>
+      <span class="flow-dash"></span>
+    </div>`;
+}
+function electricFlowHtml() {
+  const nodes = FLOW_NODES.map((n, i) => {
+    const node = `<li class="flow-node flow-node-${n.key}">
+        <span class="flow-icon">${icon(n.icon)}</span>
+        <strong>${esc(n.title)}</strong>
+        <span class="flow-desc">${esc(n.desc)}</span>
+        ${n.key === 'bat' ? '<span class="flow-warn">BMS 손상 위험</span>' : ''}
+        ${n.key === 'dcdc' ? '<span class="flow-none">없음</span>' : ''}
+      </li>`;
+    if (i === FLOW_NODES.length - 1) return node;
+    // 첫 선(알터네이터 → 충전기)만 고르지 않은 전압. 둘째 선은 충전기를 빼면 고르지 않은 전압으로 바뀐다.
+    const kind = i === 0 ? 'jitter' : 'steady';
+    return node + `<li class="flow-gap" aria-hidden="true">${flowWire(kind, i === 1 ? ' flow-wire-switch' : '')}</li>`;
+  }).join('');
+  return `<figure class="flow-box" data-flow>
+      <figcaption class="flow-head">
+        <h2>전기가 흐르는 길</h2>
+        <p>달리는 동안 만든 전기가 배터리에 모였다가 가전제품까지 가는 차례입니다.</p>
+      </figcaption>
+      <ol class="flow-chain">${nodes}</ol>
+      <p class="flow-legend"><span class="flow-key flow-key-jitter" aria-hidden="true"></span> 흔들리는 선: 전압이 고르지 않음 <span class="flow-key flow-key-steady" aria-hidden="true"></span> 곧은 선: 고른 전압</p>
+      <div class="flow-switch">
+        <button type="button" class="btn btn-outline-brand btn-sm" data-flow-toggle aria-pressed="false">주행 충전기 없이 연결하면?</button>
+        <p class="flow-caption" aria-live="polite" data-flow-caption>주행 충전기가 알터네이터의 오르내리는 전압을 리튬 배터리에 맞게 바꿔 넣어 줍니다.</p>
+      </div>
+    </figure>
+    <figure class="cap-box">
+      <figcaption class="flow-head">
+        <h2>배터리에서 꺼내 쓸 수 있는 전기</h2>
+        <p>같은 용량이라도 실제로 쓸 수 있는 양이 다릅니다.</p>
+      </figcaption>
+      <div class="cap-row">
+        <span class="cap-name">납산 · AGM</span>
+        <span class="cap-bar" aria-hidden="true"><span class="cap-fill" style="--cap:50%"></span></span>
+        <span class="cap-val">절반 정도</span>
+      </div>
+      <div class="cap-row">
+        <span class="cap-name">리튬인산철(LFP)</span>
+        <span class="cap-bar" aria-hidden="true"><span class="cap-fill cap-fill-lfp" style="--cap:90%"></span></span>
+        <span class="cap-val">대부분</span>
+      </div>
+      <p class="cap-note">이해를 돕기 위한 예시 그림입니다. 실제로 쓸 수 있는 양은 제품과 사용 환경마다 다릅니다.</p>
+    </figure>`;
+}
+
 const blocks = {
   serviceCards() {
     return site.services.map((s) => `<a class="service-card" href="/services/${esc(s.slug)}">
@@ -169,7 +237,9 @@ const blocks = {
     const s = ctx.service;
     const others = site.services.filter((o) => o !== s).map((o) =>
       `<a class="chip-link" href="/services/${esc(o.slug)}">${icon(o.icon)} ${esc(o.title)}</a>`).join('');
-    return `<div class="row g-4 g-lg-5 align-items-start">
+    // 전기/배터리 화면에만 '전기가 흐르는 길' 그림을 둔다 — 주행 충전기가 왜 필요한지는 글보다 그림이 빠르다.
+    const diagram = s.slug === 'electric' ? electricFlowHtml() : '';
+    return `${diagram}<div class="row g-4 g-lg-5 align-items-start">
         <div class="col-lg-7">
           <p class="lead-text">${esc(s.lead)}</p>
           <div class="detail-items">${s.items.map((it) => `<div class="detail-item">

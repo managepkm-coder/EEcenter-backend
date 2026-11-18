@@ -18,6 +18,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="/assets/css/site.css" rel="stylesheet">
+  <!-- 설명을 돕는 움직임 — '움직임 줄이기' 를 켜지 않은 화면에만 js-anim 을 붙인다(그 표시가 있어야 칸이 숨었다 떠오른다).
+       site.js 가 3초 안에 돌지 않으면 표시를 떼어 모든 칸을 그대로 보인다 — 스크립트가 막혀도 내용이 숨은 채 남지 않게. -->
+  <script>(function(d){if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;d.classList.add('js-anim');setTimeout(function(){if(!window.ccAnimReady)d.classList.remove('js-anim');},3000);})(document.documentElement);</script>
 </head>
 <body>
   {{header}}
