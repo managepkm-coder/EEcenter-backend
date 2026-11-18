@@ -206,3 +206,16 @@
          깨진 커밋 → 되돌림 · /health 정상 / 같은 깨진 커밋 다시 → 재시작 없이 건너뜀 / 고친 커밋 → 반영 · 실패 표시 지워짐 /
          멈춤 스위치 → 아무것도 안 함 / 서버에서 고친 파일 → 멈춤(exit 1) 후 치우면 다시 반영. bash -n 통과.
          남은 것 — 서버에서 cron 을 한 번 등록해야 켜집니다(SERVER.md '자동 반영'). 반영이 실패해도 알림은 가지 않습니다(기록 파일로 봅니다).
+
+### 2026-11-18
+   - [x] 도메인 셋을 대표 주소 carup.kr 하나로 모음 (src/middleware/canonicalHost.js · app.js · deploy/SERVER.md)
+         carupcenter.kr · carupcenter.com · carup.kr 셋 다 보유, 대표 주소는 carup.kr(2026-11-18 결정). 다른 이름(www 포함 · ibizinfo1.cafe24.com)으로
+         들어오면 같은 경로를 붙여 대표 주소로 넘깁니다(301). 이름마다 같은 화면이 따로 열리면 검색엔진이 같은 글을 흩어 세고 공유 링크도 제각각이 됩니다.
+         대표 주소는 .env 의 SITE_URL 한 곳에서 옵니다(새 설정 칸을 만들지 않음 — sitemap · 공유 주소가 이미 그 값을 씁니다).
+         넘기지 않는 것 — 서버 안 주소(localhost · 127.0.0.1 · IP: /health 확인 · ssh 미리 보기), GET · HEAD 가 아닌 요청(301 이면 브라우저가 접수 내용을 버림),
+         SITE_URL 이 localhost 인 개발 중.
+         nginx 설정 · 인증서는 서버에서 한 번 손으로 합니다(SERVER.md '도메인 붙이기') — 이 작업 환경에서는 그 서버에 들어갈 수 없습니다.
+         이 코드가 먼저 서버에 가도 안전합니다 — 지금 SITE_URL 이 ibizinfo1.cafe24.com 이고 nginx 가 그 이름만 이 앱으로 보내므로 넘길 요청이 없습니다.
+         확인한 것 — SITE_URL=https://carup.kr 로 띄워 Host 열두 갈래: carup.kr 200 · www.carup.kr · carupcenter.kr · www.carupcenter.com ·
+         ibizinfo1.cafe24.com · 대문자+포트 → 301 https://carup.kr(경로 · 쿼리 그대로), localhost:8300 · 127.0.0.1 · IP 200, /health 200, POST 는 넘기지 않음(400 그대로),
+         SITE_URL 이 없으면(개발) 넘기지 않음. npm run check 16개 정상.

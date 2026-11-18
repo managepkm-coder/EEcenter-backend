@@ -118,3 +118,28 @@ pm2 restart ee-upbattery
 ## 백업
 
 남겨야 할 것은 `data/upgrade.db`(문의 · 예약 접수)와 `.env` 둘뿐입니다. 나머지는 저장소에서 다시 받으면 됩니다.
+
+## 도메인 붙이기 (ibizinfo1 — 2026-11-18)
+
+대표 주소 `carup.kr`. `carupcenter.kr` · `carupcenter.com` 과 각 `www`, 카페24 임시 주소(`ibizinfo1.cafe24.com`)로 들어오면
+앱이 대표 주소로 넘깁니다(301 · src/middleware/canonicalHost.js — 대표 주소는 .env 의 SITE_URL).
+
+1. 도메인 관리 화면에서 도메인마다 A 레코드 둘 — `@` · `www` → `58.229.163.203` (원래 있던 주차 페이지 레코드는 고쳐 씀).
+2. 반영 확인: `for d in carup.kr www.carup.kr carupcenter.kr www.carupcenter.kr carupcenter.com www.carupcenter.com; do echo "$d $(getent hosts $d | awk '{print $1}')"; done`
+3. 서버에서(nginx 설정 파일 하나만 고침 · 원본은 /root/ee-upbattery-nginx.bak):
+
+```bash
+(
+set -e
+N="ibizinfo1.cafe24.com carup.kr www.carup.kr carupcenter.kr www.carupcenter.kr carupcenter.com www.carupcenter.com"
+F=/etc/nginx/sites-available/ee-upbattery
+grep -q "server_name ibizinfo1.cafe24.com;" $F
+cp $F /root/ee-upbattery-nginx.bak
+sed -i "s/server_name ibizinfo1.cafe24.com;/server_name $N;/" $F
+nginx -t || { cp /root/ee-upbattery-nginx.bak $F; false; }
+systemctl reload nginx
+certbot --nginx --expand --redirect $(printf -- '-d %s ' $N)
+sed -i 's|^SITE_URL=.*|SITE_URL=https://carup.kr|' /var/www/ee-upbattery/.env
+pm2 restart ee-upbattery --update-env
+)
+```

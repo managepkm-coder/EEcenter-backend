@@ -25,6 +25,8 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '20kb' }));
 
 app.get('/health', (req, res) => res.json({ ok: true }));
+// /health 다음에 둔다 — 서버의 자동 반영(auto-deploy.sh)이 127.0.0.1 로 확인하지만, 어떤 이름으로 불러도 넘기지 않게.
+app.use(require('./middleware/canonicalHost'));
 app.use('/api/inquiries', inquiryRoutes);
 app.use(adminRoutes);
 
