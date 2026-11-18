@@ -219,3 +219,8 @@
          확인한 것 — SITE_URL=https://carup.kr 로 띄워 Host 열두 갈래: carup.kr 200 · www.carup.kr · carupcenter.kr · www.carupcenter.com ·
          ibizinfo1.cafe24.com · 대문자+포트 → 301 https://carup.kr(경로 · 쿼리 그대로), localhost:8300 · 127.0.0.1 · IP 200, /health 200, POST 는 넘기지 않음(400 그대로),
          SITE_URL 이 없으면(개발) 넘기지 않음. npm run check 16개 정상.
+   - [x] 도메인 연결 끝 — https://carup.kr (서버 설정 · 2026-11-18)
+         카페24 DNS 관리에서 세 도메인(carup.kr · carupcenter.kr · carupcenter.com)과 각 www 를 A 레코드 58.229.163.203 으로 걸고,
+         서버에서 SERVER.md '도메인 붙이기' 블록을 돌렸습니다 — nginx 설정 ee-upbattery 의 server_name 에 여섯 이름을 더하고(원본 /root/ee-upbattery-nginx.bak),
+         certbot --expand 로 한 인증서에 일곱 이름(임시 주소 포함), .env 의 SITE_URL=https://carup.kr. 사용자가 "잘 열려" 로 확인했습니다.
+         이제 서버의 사이트 주소는 https://carup.kr 이고, 다른 이름은 앱이 그 주소로 넘깁니다. 인증서는 certbot 이 저절로 갱신합니다.
