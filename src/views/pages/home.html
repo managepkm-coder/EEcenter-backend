@@ -1,21 +1,23 @@
 <!--meta {"title": ""} -->
+<!-- 메인 화면(2026-11-19 — 보내주신 7meerkat 화면처럼): 사진 배너 → 가운데 정렬 구역 제목 → 번호 카드 → 주황 띠 →
+     설명 그림 → 단계 → 상담 유도 → 어두운 마무리 띠. 글은 이미 사이트에 있던 문장만 다시 배치했다(새 약속을 지어 넣지 않음). -->
 <section class="main-hero">
   <div class="container">
     <span class="hero-tag">{{logoCompany}} 캠핑카 업그레이드 센터</span>
-    <h1>캠핑카 전문 엔지니어링 &amp; 토탈 업그레이드</h1>
+    <h1>캠핑카 전문 엔지니어링 &amp;<br>토탈 업그레이드</h1>
     <p>인산철 배터리부터 냉난방, 실내 인테리어, 정식 구조변경 대행까지 완벽한 차박 라이프를 완성합니다.</p>
     <div class="hero-btns">
-      <a href="/support/inquiry" class="btn btn-white btn-lg">견적 및 상담 문의하기</a>
+      <a href="/support/inquiry" class="btn btn-brand btn-lg">견적 및 상담 문의하기</a>
       <a href="/gallery" class="btn btn-ghost btn-lg">시공 갤러리 보러가기</a>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section home-sec">
   <div class="container">
     <div class="section-head">
-      <h2>주요 업그레이드 서비스</h2>
-      <p>전문 엔지니어가 직접 진단하고 완성도 높은 맞춤 설비를 제공합니다.</p>
+      <span class="eyebrow">주요 업그레이드 서비스</span>
+      <h2>전문 엔지니어가 직접 진단하고<br>완성도 높은 맞춤 설비를 제공합니다</h2>
     </div>
     <div class="service-grid">
       <!--=serviceCards-->
@@ -23,35 +25,61 @@
   </div>
 </section>
 
-<section class="section section-soft">
+<section class="home-band-wrap">
   <div class="container">
-    <div class="row g-4 align-items-center">
-      <div class="col-lg-5">
-        <span class="eyebrow">STRUCTURE CHANGE</span>
-        <h2 class="h-section">구조변경 승인부터 검사까지<br>센터에서 한 번에</h2>
-        <p class="text-body-secondary">캠핑 설비를 달다 보면 구조변경이 필요한 경우가 있습니다. {{conversionHeadline}}을 함께 진행해 번거로운 절차를 덜어드립니다.</p>
-        <a class="btn btn-outline-brand" href="/services#conversion">구조변경 대행 안내</a>
+    <div class="home-band">
+      <div class="home-band-text">
+        <span class="home-band-tag">캠핑카 전기모듈시스템의 모든 것</span>
+        <p class="home-band-title">인증받은 리튬인산철 배터리 모듈 장착부터<br>주행 충전기, 인버터 등 전기 시스템 작업과 A/S</p>
+        <a class="btn btn-white" href="/services/electric">전기 / 배터리 자세히 보기</a>
       </div>
-      <div class="col-lg-7">
-        <ol class="steps">
-          <!--=conversionSteps-->
-        </ol>
-      </div>
+      <span class="home-band-art" aria-hidden="true"><i class="bi bi-battery-charging"></i></span>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section home-sec">
   <div class="container">
-    <div class="cta-band">
-      <div>
-        <h2>내 캠핑카에 맞는 업그레이드, 상담부터 시작하세요</h2>
-        <p>차종과 원하시는 작업을 남겨주시면 담당자가 연락드립니다.</p>
-      </div>
-      <div class="cta-band-btns">
-        <a class="btn btn-white btn-lg" href="/support/booking">작업 예약 신청</a>
-        <a class="btn btn-ghost btn-lg" href="{{telHref}}"><i class="bi bi-telephone-fill" aria-hidden="true"></i> {{tel}}</a>
-      </div>
+    <div class="section-head">
+      <span class="eyebrow">전기 / 배터리</span>
+      <h2>달리는 동안 만든 전기가<br>가전제품까지 가는 길</h2>
+      <p>주행 충전기가 왜 필요한지 「주행 충전기 없이 연결하면?」 을 눌러 보세요.</p>
     </div>
+    <!--=homeFlow-->
+  </div>
+</section>
+
+<section class="section section-soft home-sec">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">STRUCTURE CHANGE</span>
+      <h2>구조변경 승인부터 검사까지<br>센터에서 한 번에</h2>
+      <p>캠핑 설비를 달다 보면 구조변경이 필요한 경우가 있습니다. {{conversionHeadline}}을 함께 진행해 번거로운 절차를 덜어드립니다.</p>
+    </div>
+    <ol class="steps steps-row">
+      <!--=conversionSteps-->
+    </ol>
+    <div class="text-center mt-4">
+      <a class="btn btn-outline-brand" href="/services#conversion">구조변경 대행 안내</a>
+    </div>
+  </div>
+</section>
+
+<section class="section home-consult">
+  <div class="container">
+    <h2>지금 바로 전문가와 상담하세요!</h2>
+    <p>차종과 원하시는 작업을 남겨주시면 담당자가 연락드립니다.</p>
+    <div class="home-consult-btns">
+      <a class="btn btn-outline-brand" href="/support/inquiry">견적 및 상담 문의</a>
+      <a class="btn btn-outline-brand" href="/support/booking">작업 예약 신청</a>
+      <a class="btn btn-outline-brand" href="{{telHref}}"><i class="bi bi-telephone-fill" aria-hidden="true"></i> {{tel}}</a>
+    </div>
+  </div>
+</section>
+
+<section class="home-closing">
+  <div class="container">
+    <span class="home-closing-tag">E·E UPGRADE CENTER</span>
+    <h2>캠핑카 전기모듈시스템의 모든 것,<br>{{siteName}}</h2>
   </div>
 </section>

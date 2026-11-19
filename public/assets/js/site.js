@@ -66,7 +66,7 @@
 
   // site.css 의 숨기는 규칙과 같은 목록이다 — 한쪽에만 더하면 그 칸은 숨은 채 나오지 않거나 움직이지 않는다.
   var SEL = '.section-head, .service-card, .service-row, .steps .step, .detail-item, .facility-card, .info-card, .map-box, ' +
-            '.faq-item, .cta-band, .aside-card, .part-card, .greeting-text, .flow-node, .cap-box, .flow-head';
+            '.faq-item, .home-band, .home-consult .container, .home-closing h2, .aside-card, .part-card, .greeting-text, .flow-node, .cap-box, .flow-head';
   // 차례가 뜻인 목록(구조변경 단계 · 전기 흐름)은 천천히, 나머지는 살짝만 어긋나게 띄운다.
   var SLOW = '.steps .step, .flow-node';
 

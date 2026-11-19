@@ -159,7 +159,8 @@ function flowWire(kind, extra = '') {
       <span class="flow-dash"></span>
     </div>`;
 }
-function electricFlowHtml() {
+// head:false — 메인 화면처럼 바깥 구역에 이미 제목이 있을 때 그림 안의 제목을 뺀다(같은 제목이 두 번 서지 않게).
+function electricFlowHtml({ head = true } = {}) {
   const nodes = FLOW_NODES.map((n, i) => {
     const node = `<li class="flow-node flow-node-${n.key}">
         <span class="flow-icon">${icon(n.icon)}</span>
@@ -173,19 +174,22 @@ function electricFlowHtml() {
     const kind = i === 0 ? 'jitter' : 'steady';
     return node + `<li class="flow-gap" aria-hidden="true">${flowWire(kind, i === 1 ? ' flow-wire-switch' : '')}</li>`;
   }).join('');
-  return `<figure class="flow-box" data-flow>
-      <figcaption class="flow-head">
+  const caption = head ? `<figcaption class="flow-head">
         <h2>전기가 흐르는 길</h2>
         <p>달리는 동안 만든 전기가 배터리에 모였다가 가전제품까지 가는 차례입니다.</p>
-      </figcaption>
+      </figcaption>` : '';
+  return `<figure class="flow-box" data-flow aria-label="전기가 흐르는 길">
+      ${caption}
       <ol class="flow-chain">${nodes}</ol>
       <p class="flow-legend"><span class="flow-key flow-key-jitter" aria-hidden="true"></span> 흔들리는 선: 전압이 고르지 않음 <span class="flow-key flow-key-steady" aria-hidden="true"></span> 곧은 선: 고른 전압</p>
       <div class="flow-switch">
         <button type="button" class="btn btn-outline-brand btn-sm" data-flow-toggle aria-pressed="false">주행 충전기 없이 연결하면?</button>
         <p class="flow-caption" aria-live="polite" data-flow-caption>주행 충전기가 알터네이터의 오르내리는 전압을 리튬 배터리에 맞게 바꿔 넣어 줍니다.</p>
       </div>
-    </figure>
-    <figure class="cap-box">
+    </figure>`;
+}
+function capacityHtml() {
+  return `<figure class="cap-box">
       <figcaption class="flow-head">
         <h2>배터리에서 꺼내 쓸 수 있는 전기</h2>
         <p>같은 용량이라도 실제로 쓸 수 있는 양이 다릅니다.</p>
@@ -205,10 +209,11 @@ function electricFlowHtml() {
 }
 
 const blocks = {
+  // 메인 화면의 서비스 카드 — 보내주신 7meerkat 화면처럼 위에 그림 판, 아래 '01 제목'. 사진이 없어 아이콘 판으로 둔다.
   serviceCards() {
-    return site.services.map((s) => `<a class="service-card" href="/services/${esc(s.slug)}">
-        <span class="service-card-icon">${icon(s.icon)}</span>
-        <h3>${esc(s.title)}</h3>
+    return site.services.map((s, i) => `<a class="service-card" href="/services/${esc(s.slug)}">
+        <span class="service-card-art">${icon(s.icon)}</span>
+        <h3><span class="service-card-no">${String(i + 1).padStart(2, '0')}</span> ${esc(s.title)}</h3>
         <p>${esc(s.summary)}</p>
         <span class="service-card-more">자세히 보기 ${icon('bi-arrow-right')}</span>
       </a>`).join('');
@@ -226,6 +231,9 @@ const blocks = {
         <a class="btn btn-outline-brand btn-sm" href="/services/${esc(s.slug)}">${esc(s.title)} 자세히 보기</a>
       </article>`).join('');
   },
+  homeFlow() {
+    return electricFlowHtml({ head: false });
+  },
   conversionSteps() {
     return site.conversion.steps.map((st, i) => `<li class="step">
         <span class="step-no">${i + 1}</span>
@@ -238,7 +246,7 @@ const blocks = {
     const others = site.services.filter((o) => o !== s).map((o) =>
       `<a class="chip-link" href="/services/${esc(o.slug)}">${icon(o.icon)} ${esc(o.title)}</a>`).join('');
     // 전기/배터리 화면에만 '전기가 흐르는 길' 그림을 둔다 — 주행 충전기가 왜 필요한지는 글보다 그림이 빠르다.
-    const diagram = s.slug === 'electric' ? electricFlowHtml() : '';
+    const diagram = s.slug === 'electric' ? electricFlowHtml() + capacityHtml() : '';
     return `${diagram}<div class="row g-4 g-lg-5 align-items-start">
         <div class="col-lg-7">
           <p class="lead-text">${esc(s.lead)}</p>
