@@ -297,13 +297,18 @@ body.menu-open { overflow: hidden; }
 .greeting-img { width: 100%; min-height: 400px; border-radius: 12px; object-fit: cover; }
 /* 실제 사진(<img>)은 높이를 박지 않는다 — 가로 사진을 400px 높이로 자르면 간판 양 끝이 잘린다. 자리표시(div)만 최소 높이를 쓴다. */
 img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10px 24px rgba(0,0,0,.12); }
-.greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 24px; }
+.greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 32px; }
+/* 넓은 화면은 한 줄로(요청). 1200~1399px 은 칸이 좁아 한 단계 작게 — 그대로면 칸 밖으로 23px 나갔다(재서 확인). 그보다 좁으면 낱말 단위로 접힌다. */
+@media (min-width: 1200px) { .greeting-title { white-space: nowrap; } }
+@media (min-width: 1200px) and (max-width: 1399.98px) { .greeting-title { font-size: 1.45rem; } }
 .greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
-/* 대표 이름은 친필처럼 붓글씨체(2026-11-20 요청). 인사말 화면에만 글꼴을 싣는다(meta.styles). 글꼴을 못 받으면 본문 글꼴로 나온다.
-   진짜 서명 그림이 아니라 글꼴이다 — 대표님 친필 서명 이미지를 받으면 이 자리를 <img> 로 바꾸는 편이 낫다. */
-.greeting-sign-name { font-family: 'Nanum Brush Script', cursive; font-weight: 400; font-size: 2.3em; line-height: 1; margin-left: .25em;
-  display: inline-block; transform: rotate(-4deg); vertical-align: -.12em; }
+/* 대표 이름은 친필처럼 카페24 빛나는별체(2026-11-20 요청 — 나눔붓글씨체에서 바꿈). 카페24 무료 글꼴(상업 사용 · 웹 임베딩 허용)을
+   우리 서버에 둔다. 이름 석 자 '박경미' 만 남긴 2KB 파일이다(원본 1.4MB) — 대표가 바뀌면 public/assets/fonts 의 파일을
+   새 이름 글자로 다시 만든다(pyftsubset Cafe24Shiningstar.woff --text="새이름" --flavor=woff2). 글꼴이 없는 글자는 본문 글꼴로 나온다. */
+@font-face { font-family: 'Cafe24 Shiningstar Sign'; src: url('/assets/fonts/cafe24-shiningstar-sign.woff2') format('woff2'); font-display: swap; }
+.greeting-sign-name { font-family: 'Cafe24 Shiningstar Sign', cursive; font-weight: 400; font-size: 2.1em; line-height: 1; margin-left: .25em;
+  display: inline-block; transform: rotate(-4deg); vertical-align: -.1em; }
 /* 본문 오른쪽 끝을 한 줄로 맞춘다(2026-11-20 요청 — 양쪽 정렬). 낱말 사이만 넓히고 글자 사이는 벌리지 않는다.
    좁은 화면은 한 줄에 낱말이 적어 사이가 크게 벌어지므로 넓은 화면에서만. */
 @media (min-width: 768px) { .greeting-text { text-align: justify; } }
