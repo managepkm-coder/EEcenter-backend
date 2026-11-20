@@ -173,11 +173,12 @@ body.menu-open { overflow: hidden; }
 @media (max-width: 479.98px) { .sitemap-grid { grid-template-columns: 1fr; } .full-menu { padding: 0; } .full-menu-box { border-radius: 0; min-height: 100%; } }
 
 /* ---------- 메인 히어로 ---------- */
-/* 사진 위 어두운 덮개 + 가운데 흰 글자(2026-11-19 — 보내주신 7meerkat 화면처럼). 덮개가 고르게 0.62 라
+/* 사진 위 어두운 덮개 + 가운데 흰 글자(2026-11-19 — 보내주신 7meerkat 화면처럼). 사진은 알프스 길가의 주황 캠핑 밴(Unsplash 1594495894542-a46cc73e081a ·
+   2026-11-20 — 캠카에서 빌려 쓴 사진을 바꿈). 밴이 아래에 서게 62% 자리를 보인다. 덮개가 고르게 0.62 라
    사진이 가장 밝은 자리(흰색)에서도 흰 글자가 5.9:1 이다. 사진을 못 받으면 밑의 숯색이 남아 글자는 그대로 읽힌다. */
 .main-hero {
   color: #fff; text-align: center; padding: 130px 0 120px;
-  background: linear-gradient(rgba(14,16,20,.62), rgba(14,16,20,.62)), url('/assets/images/hero-workshop.jpg') center / cover no-repeat, #1c1f24;
+  background: linear-gradient(rgba(14,16,20,.62), rgba(14,16,20,.62)), url('/assets/images/hero-van-mountain.jpg') center 62% / cover no-repeat, #1c1f24;
 }
 .hero-tag { display: inline-block; color: #fff; font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; }
 .main-hero h1 { font-size: 3.2rem; font-weight: 800; line-height: 1.25; letter-spacing: -.02em; margin-bottom: 22px; }
