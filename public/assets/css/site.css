@@ -295,6 +295,8 @@ body.menu-open { overflow: hidden; }
 .photo-slot { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: #e9edf1; color: var(--muted); }
 .photo-slot .bi { font-size: 2.2rem; }
 .greeting-img { width: 100%; min-height: 400px; border-radius: 12px; object-fit: cover; }
+/* 실제 사진(<img>)은 높이를 박지 않는다 — 가로 사진을 400px 높이로 자르면 간판 양 끝이 잘린다. 자리표시(div)만 최소 높이를 쓴다. */
+img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10px 24px rgba(0,0,0,.12); }
 .greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 24px; }
 .greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
@@ -305,7 +307,7 @@ body.menu-open { overflow: hidden; }
 /* 본문 오른쪽 끝을 한 줄로 맞춘다(2026-11-20 요청 — 양쪽 정렬). 낱말 사이만 넓히고 글자 사이는 벌리지 않는다.
    좁은 화면은 한 줄에 낱말이 적어 사이가 크게 벌어지므로 넓은 화면에서만. */
 @media (min-width: 768px) { .greeting-text { text-align: justify; } }
-@media (max-width: 767.98px) { .greeting-img { min-height: 240px; } }
+@media (max-width: 767.98px) { div.greeting-img { min-height: 240px; } }
 
 .facility-card { background: #fff; border-radius: 10px; overflow: hidden; height: 100%; box-shadow: 0 4px 14px rgba(0,0,0,.06); transition: transform .25s, box-shadow .25s; }
 .facility-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
