@@ -308,7 +308,7 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 /* 인사말 끝 서명 '직원 일동' — 보내주신 손글씨 그림(2026-11-20). 흰 바탕을 투명하게 바꾸고 글씨를 제목과 같은 남색으로 칠했다
    (밝기를 투명도로 옮겨 붓 가장자리가 부드럽게 남는다). 그림이라 alt 에 같은 글을 적었다. 글꼴(카페24 빛나는별)은 쓰지 않게 되어 지웠다. */
 .greeting-sign { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 6px 14px; }
-.greeting-sign-img { height: 3.4em; width: auto; }
+.greeting-sign-img { height: 2.2em; width: auto; }   /* 3.4em 은 너무 크다는 요청(2026-11-20) — 옆 글자보다 한 단계 큰 정도 */
 /* 본문 오른쪽 끝을 한 줄로 맞춘다(2026-11-20 요청 — 양쪽 정렬). 낱말 사이만 넓히고 글자 사이는 벌리지 않는다.
    좁은 화면은 한 줄에 낱말이 적어 사이가 크게 벌어지므로 넓은 화면에서만. */
 @media (min-width: 768px) { .greeting-text { text-align: justify; } }
