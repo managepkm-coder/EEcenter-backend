@@ -204,10 +204,14 @@ body.menu-open { overflow: hidden; }
 .home-consult p { color: var(--muted); margin: 0 0 26px; }
 .home-consult-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
 /* 마무리 어두운 띠 — 주황 윗줄(--point-300 · 6:1 이상) + 흰 제목 */
-.home-closing { background: var(--brand-gradient); color: #fff; text-align: center; padding: 84px 0; }
-.home-closing-tag { display: inline-block; color: var(--point-300); font-weight: 800; letter-spacing: .12em; font-size: .9rem; margin-bottom: 12px; }
+/* 사진(호숫가 모터홈 · Unsplash 예시) 위 어두운 덮개 — 사진이 가장 밝은 하늘 자리에서도 흰 글자 5.9:1 이상(덮개 0.62).
+   사진을 못 받으면 밑의 숯색 그라데이션이 남아 글자는 그대로 읽힌다. */
+.home-closing { color: #fff; text-align: center; padding: 110px 0;
+  background: linear-gradient(rgba(14,16,20,.62), rgba(14,16,20,.62)), url('/assets/images/closing-motorhome-lake.jpg') center 55% / cover no-repeat, var(--brand-gradient); }
+/* 사진 위라 주황 글자만 두면 흰 차체 위에서 2.5:1 로 묻힌다 — 짙은 주황 알약에 흰 글자(5.2:1) */
+.home-closing-tag { display: inline-block; color: #fff; background: var(--point-600); border-radius: 999px; padding: 4px 16px; font-weight: 800; letter-spacing: .12em; font-size: .85rem; margin-bottom: 16px; }
 .home-closing h2 { font-size: 1.9rem; font-weight: 800; line-height: 1.4; margin: 0; }
-@media (max-width: 767.98px) { .home-consult h2 { font-size: 1.45rem; } .home-closing { padding: 60px 0; } .home-closing h2 { font-size: 1.4rem; } }
+@media (max-width: 767.98px) { .home-consult h2 { font-size: 1.45rem; } .home-closing { padding: 72px 0; } .home-closing h2 { font-size: 1.4rem; } }
 
 /* ---------- 서브 배너 (모든 서브 화면이 같은 높이) ---------- */
 .sub-hero { background: var(--brand-gradient); color: #fff; padding: 46px 0 52px; min-height: 200px; display: flex; align-items: center; }
