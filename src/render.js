@@ -209,10 +209,11 @@ function capacityHtml() {
 }
 
 const blocks = {
-  // 메인 화면의 서비스 카드 — 보내주신 7meerkat 화면처럼 위에 그림 판, 아래 '01 제목'. 사진이 없어 아이콘 판으로 둔다.
+  // 메인 화면의 서비스 카드 — 보내주신 7meerkat 화면처럼 위에 그림 판, 아래 '01 제목'.
+  // site.js 의 services[].photo 에 사진 주소가 있으면 실사, 없으면 아이콘 판. 사진은 장식이라 alt 를 비운다(바로 아래 제목이 같은 뜻을 말한다).
   serviceCards() {
     return site.services.map((s, i) => `<a class="service-card" href="/services/${esc(s.slug)}">
-        <span class="service-card-art">${icon(s.icon)}</span>
+        ${s.photo ? `<span class="service-card-art has-photo"><img src="${esc(s.photo)}" alt="" loading="lazy"></span>` : `<span class="service-card-art">${icon(s.icon)}</span>`}
         <h3><span class="service-card-no">${String(i + 1).padStart(2, '0')}</span> ${esc(s.title)}</h3>
         <p>${esc(s.summary)}</p>
         <span class="service-card-more">자세히 보기 ${icon('bi-arrow-right')}</span>

@@ -252,6 +252,11 @@ body.menu-open { overflow: hidden; }
 .service-card-art { display: flex; align-items: center; justify-content: center; height: 120px; margin: -30px -18px 18px; align-self: stretch; border-radius: 10px 10px 0 0;
   background: linear-gradient(135deg, var(--point-50), #ffedd5); color: var(--point-icon); font-size: 3rem; transition: transform .3s; }
 .service-card:hover .service-card-art { transform: scale(1.03); }
+/* 실사가 있을 때 — 보내주신 화면처럼 카드 폭을 꽉 채우는 사진. 덮개 없이 그대로 보인다(사진 위에 글자를 얹지 않음). */
+.service-card-art.has-photo { height: 170px; overflow: hidden; background: #e9edf1; padding: 0; }
+.service-card-art.has-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.service-card-art.has-photo { transform: none !important; }
+.service-card:hover .service-card-art.has-photo img { transform: scale(1.06); }
 .service-card-no { color: var(--point-700); margin-right: 4px; }
 .service-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy-800); margin-bottom: 8px; }
 .service-card p { font-size: .87em; color: var(--muted); line-height: 1.55; margin-bottom: 14px; flex: 1; }
