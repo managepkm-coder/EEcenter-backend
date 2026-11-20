@@ -317,6 +317,12 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 .facility-card { background: #fff; border-radius: 10px; overflow: hidden; height: 100%; box-shadow: 0 4px 14px rgba(0,0,0,.06); transition: transform .25s, box-shadow .25s; }
 .facility-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
 .facility-img { height: 240px; width: 100%; object-fit: cover; }
+/* 시설 사진 — 지금은 예시 사진이라 왼쪽 위에 작게 '예시 사진' 을 단다(우리 장비로 읽히지 않게). 글자는 alt 에도 있어 표시는 aria-hidden. */
+.facility-photo { position: relative; }
+.facility-photo .facility-img { display: block; transition: transform .4s; }
+.facility-card { overflow: hidden; }
+.facility-card:hover .facility-photo .facility-img { transform: scale(1.04); }
+.facility-example { position: absolute; left: 12px; top: 12px; background: rgba(14,16,20,.72); color: #fff; font-size: .72em; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
 .facility-body { padding: 24px; text-align: center; }
 .facility-body h3 { font-size: 1.08rem; font-weight: 800; color: var(--navy-800); margin-bottom: 12px; }
 .facility-body p { color: var(--muted); font-size: .9em; line-height: 1.7; margin: 0; }
