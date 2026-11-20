@@ -39,10 +39,13 @@ const company = {
 // 서비스 다섯 가지. 메인 카드 · 운영내용 목록 · 서비스별 화면 · 문의 폼의 체크박스가 이 표를 쓴다.
 // 가격 · 보증 기간은 적지 않는다 — 차량마다 진단 뒤 견적이라 정해진 값이 없고, 적으면 약속이 된다.
 // photo — 메인 화면 서비스 카드 위 사진(2026-11-20 요청 "아이콘 말고 실사로"). '/assets/images/service-electric.jpg' 처럼 적고 파일은
-// public/assets/images 에 둔다(가로 1200px 안팎 · 가로가 긴 사진). 비워 두면 아이콘 판이 나간다 — 사진을 받기 전에는 비워 둔다.
+// public/assets/images 에 둔다(가로 1200px 안팎 · 가로가 긴 사진). 비워 두면 아이콘 판이 나간다.
+// 지금 다섯 장은 Unsplash 무료 사진(상업 사용 가능 · 출처 표기 의무 없음)을 900×560 으로 잘라 둔 예시다 — 우리 시공 사진이 아니다.
+// 회사 시공 사진을 받으면 같은 파일 이름으로 덮어쓰면 된다(사진 ID 는 진행 기록 2026-11-20).
 const services = [
   {
     slug: 'electric',
+    photo: '/assets/images/service-electric.jpg',
     title: '전기 / 배터리',
     icon: 'bi-battery-charging',
     summary: '리튬인산철 배터리, 고출력 주행충전기, 순수정현파 인버터 시공',
@@ -56,6 +59,7 @@ const services = [
   },
   {
     slug: 'hvac',
+    photo: '/assets/images/service-hvac.jpg',
     title: '냉난방 / 공조',
     icon: 'bi-fan',
     summary: '무시동 히터, 저소음 차량용 인버터 에어컨 및 덕트 맞춤 설치',
@@ -68,6 +72,7 @@ const services = [
   },
   {
     slug: 'exterior',
+    photo: '/assets/images/service-exterior.jpg',
     title: '외장 튜닝',
     icon: 'bi-sun',
     summary: '대형 어닝 설치, 태양광 패널, 루프랙 및 외장 파츠 장착',
@@ -80,6 +85,7 @@ const services = [
   },
   {
     slug: 'interior',
+    photo: '/assets/images/service-interior.jpg',
     title: '실내 인테리어',
     icon: 'bi-house-heart',
     summary: '침상 평탄화 튜닝, 편백/자작나무 가구 제작 및 실내 수납 시스템',
@@ -92,6 +98,7 @@ const services = [
   },
   {
     slug: 'plumbing',
+    photo: '/assets/images/service-plumbing.jpg',
     title: '청수 / 오수 설비',
     icon: 'bi-droplet-half',
     summary: '대용량 워터탱크, 압력펌프, 온수 시스템 및 동파 방지 배관',
