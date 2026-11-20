@@ -3,7 +3,8 @@
   <div class="container">
     <!-- 제목은 사진 위쪽 왼쪽 끝에서 시작해 한 줄로(2026-11-20 요청). 좁은 화면에서는 낱말 단위로 접힌다. -->
     <h2 class="greeting-title">캠핑카 전기모듈시스템의 모든 것, <span class="text-brand">{{siteName}}</span>가 함께합니다.</h2>
-    <div class="row align-items-center g-4 g-lg-5">
+    <!-- 사진 위 끝을 본문 첫 줄에 맞춘다(2026-11-20 요청 — 가운데 맞춤이면 사진이 아래로 내려가 제목과 사이가 벌어졌다). -->
+    <div class="row align-items-start g-4 g-lg-5">
       <div class="col-md-5">
         <!-- 센터 건물 전경(2026-11-20 받은 사진 · 오른쪽 아래 생성 도구 표시를 지움). 가로 사진이라 잘라내지 않고 비율 그대로 보인다. -->
         <img class="greeting-img" src="/assets/images/center-front.jpg" width="1600" height="937" alt="E·E 업그레이드센터 건물 전경 — 검은 외벽에 주황 간판 'E·E 업그레이드센터' 가 달린 단층 건물" loading="lazy">

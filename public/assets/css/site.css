@@ -301,7 +301,9 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 /* 넓은 화면은 한 줄로(요청). 1200~1399px 은 칸이 좁아 한 단계 작게 — 그대로면 칸 밖으로 23px 나갔다(재서 확인). 그보다 좁으면 낱말 단위로 접힌다. */
 @media (min-width: 1200px) { .greeting-title { white-space: nowrap; } }
 @media (min-width: 1200px) and (max-width: 1399.98px) { .greeting-title { font-size: 1.45rem; } }
-.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
+.greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }
+/* 줄 간격(1.9) 때문에 첫 줄 글자는 칸 위 끝보다 조금 아래에서 시작한다 — 그만큼 당겨 사진 위 끝과 첫 줄 글자 위가 같은 줄에 서게 한다 */
+.greeting-text:first-of-type { margin-top: -.45em; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
 /* 인사말 끝 서명 '직원 일동' — 보내주신 손글씨 그림(2026-11-20). 흰 바탕을 투명하게 바꾸고 글씨를 제목과 같은 남색으로 칠했다
    (밝기를 투명도로 옮겨 붓 가장자리가 부드럽게 남는다). 그림이라 alt 에 같은 글을 적었다. 글꼴(카페24 빛나는별)은 쓰지 않게 되어 지웠다. */
