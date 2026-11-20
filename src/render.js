@@ -422,6 +422,8 @@ function renderPage({ view, pathname, ctx = {}, meta: extraMeta = {} }) {
 
   const title = meta.title ? `${meta.title} | ${site.company.siteName}` : site.company.siteName;
   const scripts = (meta.scripts || []).map((s) => `<script src="${esc(s)}" defer></script>`).join('\n  ');
+  // 화면 하나만 쓰는 글꼴 · 스타일(인사말의 손글씨 서명 등) — 모든 화면에 실으면 쓰지도 않는 글꼴을 매번 받는다.
+  const styles = (meta.styles || []).map((h) => `<link href="${esc(h)}" rel="stylesheet">`).join('\n  ');
   const layout = readView('layout');
   const parts = {
     title: esc(title),
@@ -434,6 +436,7 @@ function renderPage({ view, pathname, ctx = {}, meta: extraMeta = {} }) {
     footer: footerHtml(),
     fullMenu: fullMenuHtml(),
     scripts,
+    styles,
   };
   // 한 번에 바꾼다 — 차례로 바꾸면 앞에서 넣은 본문 안에 같은 표시가 있을 때 두 번 채워진다.
   return versionAssets(layout.replace(/\{\{(\w+)\}\}/g, (all, key) => (key in parts ? parts[key] : all)));

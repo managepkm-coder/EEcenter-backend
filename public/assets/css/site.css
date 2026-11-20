@@ -298,6 +298,13 @@ body.menu-open { overflow: hidden; }
 .greeting-title { font-size: 1.65rem; font-weight: 800; color: var(--navy-800); line-height: 1.45; margin-bottom: 24px; }
 .greeting-text { color: #4a5561; line-height: 1.9; margin-bottom: 20px; }   /* 본문 크기 그대로(main) — 30% 줄였더니 너무 작다고 해 본문과 같게 */
 .greeting-sign { text-align: right; font-weight: 800; font-size: 1.1rem; color: var(--navy-800); margin-top: 32px; }
+/* 대표 이름은 친필처럼 붓글씨체(2026-11-20 요청). 인사말 화면에만 글꼴을 싣는다(meta.styles). 글꼴을 못 받으면 본문 글꼴로 나온다.
+   진짜 서명 그림이 아니라 글꼴이다 — 대표님 친필 서명 이미지를 받으면 이 자리를 <img> 로 바꾸는 편이 낫다. */
+.greeting-sign-name { font-family: 'Nanum Brush Script', cursive; font-weight: 400; font-size: 2.3em; line-height: 1; margin-left: .25em;
+  display: inline-block; transform: rotate(-4deg); vertical-align: -.12em; }
+/* 본문 오른쪽 끝을 한 줄로 맞춘다(2026-11-20 요청 — 양쪽 정렬). 낱말 사이만 넓히고 글자 사이는 벌리지 않는다.
+   좁은 화면은 한 줄에 낱말이 적어 사이가 크게 벌어지므로 넓은 화면에서만. */
+@media (min-width: 768px) { .greeting-text { text-align: justify; } }
 @media (max-width: 767.98px) { .greeting-img { min-height: 240px; } }
 
 .facility-card { background: #fff; border-radius: 10px; overflow: hidden; height: 100%; box-shadow: 0 4px 14px rgba(0,0,0,.06); transition: transform .25s, box-shadow .25s; }
