@@ -322,16 +322,18 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 .facility-body p { color: var(--muted); font-size: .9em; line-height: 1.7; margin: 0; }
 
 /* ---------- 오시는 길 ---------- */
-.map-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 40px 20px; text-align: center; height: 100%; }
-.map-label { display: inline-block; margin: 8px 0 0; padding: 2px 14px; border-radius: 20px; background: var(--point-600); color: var(--on-point); font-weight: 800; font-size: .9em; }
+.map-box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 28px 24px 30px; text-align: center; height: 100%; }
+.map-label { display: inline-block; margin: 0 0 16px; padding: 2px 14px; border-radius: 20px; background: var(--point-600); color: var(--on-point); font-weight: 800; font-size: .9em; }
 /* 오시는 길 칸의 주소 두 줄 — 이름(본사 · 사업장)을 앞에 세워 줄을 바꿔도 주소끼리 왼쪽이 맞게 */
 .address-list { list-style: none; margin: 0; padding: 0; color: #4a5561; }
 .address-list li { display: flex; gap: 10px; }
 .address-list li + li { margin-top: 4px; }
 .address-list span { flex: 0 0 auto; min-width: 3.5em; color: var(--muted); font-weight: 700; }
-.map-box > .bi { font-size: 2.4rem; color: var(--point-icon); }
-.map-address { font-size: 1.2rem; font-weight: 800; color: var(--navy-800); margin: 10px 0 4px; }
-.map-address-en { color: var(--muted); font-size: .88em; margin-bottom: 20px; }
+.map-address { font-size: 1.2rem; font-weight: 800; color: var(--navy-800); margin: 22px 0 4px; }
+/* 지도 칸 — 가로 16:10. 둥근 모서리 안에 가두고, 지도를 못 받으면 옅은 회색 판이 남는다. */
+.map-embed { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: #e5e9ef; border: 1px solid var(--line); margin-bottom: 18px; }
+.map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.map-address-en { color: var(--muted); font-size: .88em; margin: 0; }
 .map-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .info-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 26px; height: 100%; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
 .info-row { display: flex; gap: 16px; align-items: flex-start; }

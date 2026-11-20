@@ -364,15 +364,20 @@ const blocks = {
   mapBoxes() {
     return site.company.addresses.map((a) => {
       const q = encodeURIComponent(a.mapQuery || a.ko);
+      // 차례(2026-11-20 요청): 이름표 → 지도 → 카카오맵 · 네이버 지도 단추 → 한글 주소 → 영문 주소.
+      // 지도는 구글 지도 퍼가기(iframe)다 — 열쇠(API 키) 없이 주소만으로 그려진다. 카카오 · 네이버 지도 API 는 앱 키를 받아
+      // 도메인을 등록해야 해서, 받기 전까지는 이쪽을 쓴다. 지도를 못 받아도 아래 단추 · 주소는 그대로 남는다.
       return `<div class="col-lg-6"><div class="map-box">
-        ${icon('bi-geo-alt')}
-        <p class="map-label">${esc(a.label)}</p>
-        <p class="map-address">${esc(a.ko)}</p>
-        <p class="map-address-en">${esc(a.en)}</p>
+        <p class="map-label">${icon('bi-geo-alt-fill')} ${esc(a.label)}</p>
+        <div class="map-embed">
+          <iframe src="https://maps.google.com/maps?q=${q}&amp;hl=ko&amp;z=16&amp;output=embed" title="${esc(a.label)} 위치 지도 — ${esc(a.ko)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </div>
         <div class="map-btns">
           <a class="btn btn-brand" href="https://map.kakao.com/link/search/${q}" target="_blank" rel="noopener noreferrer" aria-label="${esc(a.label)} 카카오맵에서 보기">${icon('bi-geo-alt-fill')} 카카오맵</a>
           <a class="btn btn-outline-brand" href="https://map.naver.com/p/search/${q}" target="_blank" rel="noopener noreferrer" aria-label="${esc(a.label)} 네이버 지도에서 보기">${icon('bi-map')} 네이버 지도</a>
         </div>
+        <p class="map-address">${esc(a.ko)}</p>
+        <p class="map-address-en">${esc(a.en)}</p>
       </div></div>`;
     }).join('');
   },
