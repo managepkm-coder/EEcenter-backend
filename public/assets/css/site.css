@@ -218,7 +218,7 @@ body.menu-open { overflow: hidden; }
 .sub-hero { background: var(--brand-gradient); color: #fff; padding: 46px 0 52px; min-height: 200px; display: flex; align-items: center; }
 .sub-hero .container { text-align: center; }
 .sub-crumb { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 0; margin: 0 0 14px; font-size: .85rem; color: #fff; }
-.sub-crumb li + li::before { content: '›'; margin-right: 6px; color: #fff; }
+.sub-crumb li + li::before { content: '›'; margin-right: 6px; color: #fff; display: inline-block; }   /* inline-block — 지금 화면 글자의 밑줄이 '›' 까지 번지지 않게(밑줄은 inline-block 안으로 이어지지 않는다) */
 .sub-crumb a { color: #fff; text-decoration: none; }
 .sub-crumb a:hover { color: #fff; text-decoration: underline; }
 .sub-crumb [aria-current] { color: #fff; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }   /* 색으로 가르지 못해 밑줄로 */
