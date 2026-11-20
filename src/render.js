@@ -401,9 +401,6 @@ const blocks = {
       </div></div>`;
     }).join('');
   },
-  addressList() {
-    return site.company.addresses.map((a) => `<li><span>${esc(a.label)}</span>${esc(a.ko)}</li>`).join('');
-  },
 };
 
 // {{이름}} 자리에 넣는 회사 정보. 모두 글자로 이스케이프한다.
