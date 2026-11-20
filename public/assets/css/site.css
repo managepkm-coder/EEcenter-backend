@@ -334,6 +334,12 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 .map-embed { position: relative; aspect-ratio: 16 / 10; border-radius: 10px; overflow: hidden; background: #e5e9ef; border: 1px solid var(--line); margin-bottom: 18px; }
 .map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .map-address-en { color: var(--muted); font-size: .88em; margin: 0; }
+/* 지도 칸 아래 연락처 — 가운데 정렬인 칸 안에서도 연락처는 왼쪽 정렬(아이콘 · 제목 · 시간표가 줄을 맞추게), 위에 옅은 선으로 주소와 가른다 */
+.map-contact { text-align: left; margin-top: auto; padding-top: 22px; border-top: 1px solid var(--line); }
+/* 두 칸의 주소 길이가 달라도 연락처가 같은 높이에서 시작하게 — 칸을 세로 flex 로 두고 연락처를 바닥에 붙인다 */
+.map-box { display: flex; flex-direction: column; }
+.map-box > .map-label { align-self: center; }
+.map-address-en { margin-bottom: 22px; }
 .map-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .info-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 26px; height: 100%; box-shadow: 0 2px 8px rgba(0,0,0,.04); }
 .info-row { display: flex; gap: 16px; align-items: flex-start; }

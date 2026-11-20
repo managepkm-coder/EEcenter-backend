@@ -361,7 +361,10 @@ const blocks = {
     return site.company.hours.map((h) => `<li><span>${esc(h.label)}</span><strong>${esc(h.value)}</strong></li>`).join('');
   },
   // 주소마다 지도 칸 하나 — 본사 · 사업장(site.js 의 addresses). 지도 단추 이름에 어느 곳인지 넣어 읽기 프로그램이 두 쌍을 가를 수 있게 한다.
+  // 지도 칸 맨 아래에 고객센터 · 이메일 문의를 함께 둔다(2026-11-20 요청). 두 곳의 연락처가 같아 칸마다 같은 내용이지만,
+  // 한 곳을 보고 찾아오는 사람이 그 칸 안에서 전화 · 운영 시간까지 다 보게 한다.
   mapBoxes() {
+    const c = site.company;
     return site.company.addresses.map((a) => {
       const q = encodeURIComponent(a.mapQuery || a.ko);
       // 차례(2026-11-20 요청): 이름표 → 지도 → 카카오맵 · 네이버 지도 단추 → 한글 주소 → 영문 주소.
@@ -378,6 +381,23 @@ const blocks = {
         </div>
         <p class="map-address">${esc(a.ko)}</p>
         <p class="map-address-en">${esc(a.en)}</p>
+        <div class="map-contact">
+          <div class="info-row">
+            <span class="info-icon">${icon('bi-telephone-fill')}</span>
+            <div>
+              <h3>고객센터 및 예약 문의</h3>
+              <p><a href="${telHref(c.tel)}">${esc(c.tel)}</a> (팩스 ${esc(c.fax)})</p>
+              <ul class="hours-list">${blocks.hoursList()}</ul>
+            </div>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">${icon('bi-envelope-fill')}</span>
+            <div>
+              <h3>이메일 문의</h3>
+              <p><a href="mailto:${esc(c.email)}">${esc(c.email)}</a></p>
+            </div>
+          </div>
+        </div>
       </div></div>`;
     }).join('');
   },
