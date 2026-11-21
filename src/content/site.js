@@ -127,7 +127,20 @@ const conversion = {
 // 시공 사례 · 공지. 아직 올릴 것이 없어 비워 둔다 — 화면은 "준비 중" 안내를 그린다.
 // 항목을 더할 때: gallery { title, service(slug), vehicle, image('/assets/images/...'), featured?, before?, after? }
 //                  notices { date('YYYY-MM-DD'), title, body }
-const gallery = [];
+// 예시 사진(2026-11-21 요청 "시공사례에 예시사진 가짜사진 넣어줘"). 센터의 실제 시공 사진이 아니라 Unsplash 무료 사진이라
+// example: true 를 달아 카드마다 '예시 사진' 표시를 붙이고 alt 도 '예시 사진 — ' 으로 시작한다 — 표시 없이 두면 남의 차 사진이
+// 우리 시공 사례로 읽힌다. 차종(vehicle)은 지어 쓰지 않았다. 실제 사례를 받으면 이 목록을 갈아끼운다.
+// Before & After 의 작업 전 사진은 같은 사진의 색을 빼고 어둡게 만든 것이다(진짜 비교가 아니라 칸 모양을 보이려는 자리).
+const gallery = [
+  { example: true, title: '주행 충전기 · 배선 작업', service: 'electric', image: '/assets/images/gallery-ex-electric-charger.jpg' },
+  { example: true, title: '태양광 패널 설치', service: 'exterior', image: '/assets/images/gallery-ex-electric-solar.jpg' },
+  { example: true, title: '루프탑 텐트 · 루프랙 장착', service: 'exterior', image: '/assets/images/gallery-ex-exterior-rooftent.jpg', featured: true },
+  { example: true, title: '침상 평탄화 · 가구 제작', service: 'interior', image: '/assets/images/gallery-ex-interior-bed.jpg', featured: true,
+    before: '/assets/images/gallery-ex-interior-bed-before.jpg', after: '/assets/images/gallery-ex-interior-bed.jpg' },
+  { example: true, title: '운전석 내장 정비', service: 'interior', image: '/assets/images/gallery-ex-interior-cab.jpg' },
+  { example: true, title: '실내 차광 · 공조 정비', service: 'hvac', image: '/assets/images/gallery-ex-hvac-window.jpg' },
+  { example: true, title: '싱크대 · 급수 라인 설치', service: 'plumbing', image: '/assets/images/gallery-ex-plumbing-sink.jpg', featured: true },
+];
 const notices = [];
 
 // 메뉴. href 의 # 은 그 화면 안의 구역이다.

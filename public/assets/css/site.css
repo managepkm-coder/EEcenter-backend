@@ -112,7 +112,7 @@ main .form-control, main .form-select { font-size: 1em; }
 .btn-all-menu { white-space: nowrap; flex-shrink: 0; background: var(--point-500); color: var(--on-point); border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .btn-all-menu:hover { background: var(--point-600); }   /* 보내주신 화면의 '상담하기' 처럼 주황 알약 · 흰 굵은 글자 */
 
-.notice-bar { background: var(--point-50); border-bottom: 1px solid var(--point-line); padding: 12px 20px; text-align: center; font-size: .92rem; color: #7c2d12; }   /* 옅은 주황 위 짙은 갈색 글자 9.6:1 */
+.notice-bar { margin: 0; background: var(--point-50); border-bottom: 1px solid var(--point-line); padding: 12px 20px; text-align: center; font-size: .92rem; color: #7c2d12; }   /* 옅은 주황 위 짙은 갈색 글자 9.6:1 */
 .notice-bar .bi { color: var(--point-icon); margin-right: 6px; }
 .notice-bar strong { color: #7c2d12; }
 
@@ -185,6 +185,13 @@ body.menu-open { overflow: hidden; }
 .main-hero p { font-size: 1.08rem; color: #fff; max-width: 680px; margin: 0 auto 34px; line-height: 1.7; }
 .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 @media (max-width: 767.98px) { .main-hero { padding: 80px 0 72px; } .main-hero h1 { font-size: 2rem; } }
+/* 구조변경 대행 안내 — 메인에서는 머리말 아래 띠 대신 배너 안 단추 아래에 작게(2026-11-21 요청). 반투명 판을 깔아
+   사진이 밝은 자리에서도 흰 글자가 읽힌다. .main-hero p 의 크기 · 여백을 받지 않게 클래스를 겹쳐 적는다. */
+.main-hero .hero-notice { display: inline-block; max-width: 100%; margin: 34px auto 0; padding: 8px 16px; border-radius: 999px;
+  background: rgba(14,16,20,.45); border: 1px solid rgba(255,255,255,.22); font-size: .82rem; line-height: 1.55; color: rgba(255,255,255,.92); }
+.main-hero .hero-notice .bi { color: var(--point-300); margin-right: 6px; }
+.main-hero .hero-notice strong { color: #fff; }
+@media (max-width: 575.98px) { .main-hero .hero-notice { border-radius: 12px; font-size: .74rem; margin-top: 26px; } }
 
 /* ---------- 메인 화면 구역 (보내주신 화면처럼 가운데 정렬 · 주황 윗줄 · 두 줄 굵은 제목) ---------- */
 .home-sec .section-head { margin-bottom: 44px; }
@@ -377,6 +384,9 @@ img.greeting-img { min-height: 0; height: auto; display: block; box-shadow: 0 10
 .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .gallery-card { margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
 .gallery-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.gallery-photo { position: relative; }   /* 예시 사진 표시(.facility-example)를 사진 왼쪽 위에 얹는 자리 */
+.gallery-card img, .ba-card img { height: auto; }
+.gallery-example-note { color: var(--muted); font-weight: 400; font-size: .88em; }
 .gallery-card figcaption { padding: 14px 16px; display: flex; flex-direction: column; gap: 2px; }
 .gallery-card figcaption span { color: var(--muted); font-size: .88em; }
 .ba-grid { display: grid; gap: 18px; }

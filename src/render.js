@@ -42,6 +42,21 @@ function sectionOf(pathname) {
   return site.nav.find((n) => n.href.split('/')[1] === seg) || null;
 }
 
+// 구조변경 대행 안내 한 줄. 서브 화면은 머리말 아래 띠로, 메인은 배너 안에 작게 둔다(2026-11-21 요청 — 메인에서는 띠가
+// 배너 위를 한 줄 더 차지해 배너 안으로 옮김). 글은 한 곳에서 만들어 두 자리가 같은 말을 한다.
+// 시공 갤러리 사진 — 예시 사진이면 alt 앞에 '예시 사진 — ' 을 붙이고 왼쪽 위에 표시를 단다(시설안내와 같은 모양).
+// Before & After 칸은 왼쪽 위에 Before · After 이름표가 서서 표시를 사진에 달지 않고 제목 옆에 적는다(badge=false).
+function galleryImg(g, src, altTail = '', badge = true) {
+  const alt = `${g.example ? '예시 사진 — ' : ''}${g.title}${altTail}`;
+  const img = `<img src="${esc(src)}" width="900" height="675" alt="${esc(alt)}" loading="lazy">`;
+  return g.example && badge ? `<div class="gallery-photo">${img}<span class="facility-example" aria-hidden="true">예시 사진</span></div>` : img;
+}
+const serviceTitle = (slug) => (site.services.find((s) => s.slug === slug) || {}).title || '';
+
+function noticeLine(cls) {
+  return `<p class="${cls}">${icon('bi-patch-check-fill')} 안전한 캠핑을 위한 규격 준수: <strong>${esc(site.conversion.headline)}</strong>을 센터에서 원스톱으로 지원합니다.</p>`;
+}
+
 function headerHtml(pathname) {
   const current = sectionOf(pathname);
   const items = site.nav.map((n) => {
@@ -73,10 +88,7 @@ function headerHtml(pathname) {
       </div>
     </div>
   </header>
-  <div class="notice-bar">
-    ${icon('bi-patch-check-fill')}
-    안전한 캠핑을 위한 규격 준수: <strong>${esc(site.conversion.headline)}</strong>을 센터에서 원스톱으로 지원합니다.
-  </div>`;
+  ${pathname === '/' ? '' : noticeLine('notice-bar')}`;
 }
 
 function fullMenuHtml() {
@@ -329,6 +341,9 @@ const blocks = {
         </details>
       </li>`).join('')}</ul>`;
   },
+  heroNotice() {
+    return noticeLine('hero-notice');
+  },
   galleryFilters() {
     return ['<button type="button" class="filter-btn is-on" data-filter="all" aria-pressed="true">전체</button>']
       .concat(site.services.map((s) => `<button type="button" class="filter-btn" data-filter="${esc(s.slug)}" aria-pressed="false">${esc(s.title)}</button>`))
@@ -339,23 +354,23 @@ const blocks = {
       return `<p class="empty-note">${icon('bi-camera')} 시공 사례를 정리하고 있습니다. 곧 차종별 작업 사진으로 찾아뵙겠습니다.</p>`;
     }
     return site.gallery.map((g) => `<figure class="gallery-card" data-service="${esc(g.service)}">
-        <img src="${esc(g.image)}" alt="${esc(g.title)}" loading="lazy">
-        <figcaption><strong>${esc(g.title)}</strong><span>${esc(g.vehicle || '')}</span></figcaption>
+        ${galleryImg(g, g.image)}
+        <figcaption><strong>${esc(g.title)}</strong><span>${esc(g.vehicle || serviceTitle(g.service))}</span></figcaption>
       </figure>`).join('');
   },
   beforeAfterList() {
     const pairs = site.gallery.filter((g) => g.before && g.after);
     if (!pairs.length) return '<p class="empty-note">작업 전 · 후 비교 사진을 준비하고 있습니다.</p>';
     return pairs.map((g) => `<div class="ba-card">
-        <figure><img src="${esc(g.before)}" alt="${esc(g.title)} 작업 전" loading="lazy"><figcaption>Before</figcaption></figure>
-        <figure><img src="${esc(g.after)}" alt="${esc(g.title)} 작업 후" loading="lazy"><figcaption>After</figcaption></figure>
-        <p>${esc(g.title)}</p>
+        <figure>${galleryImg(g, g.before, ' 작업 전', false)}<figcaption>Before</figcaption></figure>
+        <figure>${galleryImg(g, g.after, ' 작업 후', false)}<figcaption>After</figcaption></figure>
+        <p>${esc(g.title)}${g.example ? ' <span class="gallery-example-note">(예시 사진)</span>' : ''}</p>
       </div>`).join('');
   },
   featuredList() {
     const f = site.gallery.filter((g) => g.featured);
     if (!f.length) return '<p class="empty-note">이달의 튜닝을 준비하고 있습니다.</p>';
-    return f.map((g) => `<figure class="gallery-card"><img src="${esc(g.image)}" alt="${esc(g.title)}" loading="lazy"><figcaption><strong>${esc(g.title)}</strong></figcaption></figure>`).join('');
+    return f.map((g) => `<figure class="gallery-card">${galleryImg(g, g.image)}<figcaption><strong>${esc(g.title)}</strong></figcaption></figure>`).join('');
   },
   hoursList() {
     return site.company.hours.map((h) => `<li><span>${esc(h.label)}</span><strong>${esc(h.value)}</strong></li>`).join('');
