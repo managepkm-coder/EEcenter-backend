@@ -46,7 +46,7 @@ a:hover { color: var(--navy-800); }
 :focus-visible { outline: 3px solid var(--point-icon); outline-offset: 2px; }   /* 흰 바탕 5.2:1 */
 /* 어두운 바탕(머리말 · 바닥글 · 배너 · 상담 띠) 위에서는 짙은 블루가 2.8:1 로 묻혀 밝은 블루로 그린다(6.9:1) */
 .site-footer :focus-visible { outline-color: var(--point-300); }
-.notice-bar :focus-visible, .main-hero :focus-visible, .sub-hero :focus-visible, .cta-band :focus-visible, .home-band :focus-visible, .home-closing :focus-visible { outline-color: #fff; }   /* 어두운 사진 · 숯색 · 주황 띠 위 — 흰 테두리 */
+.main-hero :focus-visible, .sub-hero :focus-visible, .cta-band :focus-visible, .home-band :focus-visible, .home-closing :focus-visible { outline-color: #fff; }   /* 어두운 사진 · 숯색 · 주황 띠 위 — 흰 테두리 */
 .skip-link {
   position: absolute; left: -9999px; top: 8px; z-index: 2000;
   background: var(--white); color: var(--navy-800); padding: 8px 14px; border-radius: 6px; font-weight: 700;
@@ -112,9 +112,6 @@ main .form-control, main .form-select { font-size: 1em; }
 .btn-all-menu { white-space: nowrap; flex-shrink: 0; background: var(--point-500); color: var(--on-point); border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
 .btn-all-menu:hover { background: var(--point-600); }   /* 보내주신 화면의 '상담하기' 처럼 주황 알약 · 흰 굵은 글자 */
 
-.notice-bar { margin: 0; background: var(--point-50); border-bottom: 1px solid var(--point-line); padding: 12px 20px; text-align: center; font-size: .92rem; color: #7c2d12; }   /* 옅은 주황 위 짙은 갈색 글자 9.6:1 */
-.notice-bar .bi { color: var(--point-icon); margin-right: 6px; }
-.notice-bar strong { color: #7c2d12; }
 
 /* 넓은 메뉴 다섯 칸이 들어가지 않는 폭에서는 '전체메뉴' 하나로 모은다.
    머리말 글자를 18px 로 키운 뒤(2026-10-24) 메뉴 · 로고 · 전화 · 단추를 합치면 1340px 가량이라 1400px 부터 펼친다.
@@ -138,7 +135,6 @@ main .form-control, main .form-select { font-size: 1em; }
   .site-logo-co { display: none; }
   .header-tel span { display: none; }
   .header-tel { font-size: 1.15em; padding: 6px; }
-  .notice-bar { font-size: .82rem; text-align: left; }
 }
 
 /* ---------- 전체메뉴 ---------- */

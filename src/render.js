@@ -42,8 +42,8 @@ function sectionOf(pathname) {
   return site.nav.find((n) => n.href.split('/')[1] === seg) || null;
 }
 
-// 구조변경 대행 안내 한 줄. 서브 화면은 머리말 아래 띠로, 메인은 배너 안에 작게 둔다(2026-11-21 요청 — 메인에서는 띠가
-// 배너 위를 한 줄 더 차지해 배너 안으로 옮김). 글은 한 곳에서 만들어 두 자리가 같은 말을 한다.
+// 구조변경 대행 안내 한 줄 — 메인 배너 안에만 작게 둔다. 머리말 아래 띠로 모든 화면에 걸던 것을 2026-11-21 에 걷어냈다
+// (메인은 배너 안으로, 서브 화면은 "다 빼줘" 요청). 구조변경 대행은 메뉴의 '구조변경 대행 안내' 화면이 자세히 말한다.
 // 시공 갤러리 사진 — 예시 사진이면 alt 앞에 '예시 사진 — ' 을 붙이고 왼쪽 위에 표시를 단다(시설안내와 같은 모양).
 // Before & After 칸은 왼쪽 위에 Before · After 이름표가 서서 표시를 사진에 달지 않고 제목 옆에 적는다(badge=false).
 function galleryImg(g, src, altTail = '', badge = true) {
@@ -87,8 +87,7 @@ function headerHtml(pathname) {
         </button>
       </div>
     </div>
-  </header>
-  ${pathname === '/' ? '' : noticeLine('notice-bar')}`;
+  </header>`;
 }
 
 function fullMenuHtml() {
