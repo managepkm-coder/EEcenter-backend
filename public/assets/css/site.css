@@ -240,7 +240,6 @@ body.menu-open { overflow: hidden; }
 .eyebrow { display: inline-block; font-size: .8rem; font-weight: 800; letter-spacing: .12em; color: var(--point-700); margin-bottom: 8px; }
 .h-section { font-size: 1.75rem; font-weight: 800; color: var(--navy-800); margin-bottom: 14px; }
 .h-block { font-size: 1.35rem; font-weight: 800; color: var(--navy-800); padding-bottom: 10px; border-bottom: 2px solid var(--navy-800); margin-bottom: 18px; }
-.narrow { max-width: 880px; }
 .note-text { color: var(--muted); font-size: .92em; margin-top: 20px; text-align: center; }
 .empty-note { background: var(--soft); border: 1px dashed #c8d1db; border-radius: 10px; padding: 34px 20px; text-align: center; color: var(--muted); margin: 0; grid-column: 1 / -1; }
 .section-soft .empty-note { background: #fff; }
